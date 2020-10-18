@@ -21,4 +21,4 @@ class App extends React.Component {
 }
 
 export default App;
-// [10]using ref for dom acssess - [2]issues with css grid
+// to review the app should watch section[10](Using Ref's for Dom Acssess) lecture[8](App Overview)
