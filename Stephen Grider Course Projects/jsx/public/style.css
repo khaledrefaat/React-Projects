@@ -1,0 +1,12 @@
+body {
+	text-transform: capitalize;
+}
+
+button {
+	text-transform: capitalize;
+	border: none;
+	padding: 10px 20px;
+	margin-left: 10px;
+	background-color: #273c75;
+	color: #fff;
+}
