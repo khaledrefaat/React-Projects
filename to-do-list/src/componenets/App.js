@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoInput from './TodoInput';
+import TodoList from './TodoList';
 import './App.css';
 class App extends React.Component {
 	render() {
@@ -7,6 +8,7 @@ class App extends React.Component {
 			<div className="container">
 				<h1>Todo List</h1>
 				<TodoInput />
+				<TodoList />
 			</div>
 		);
 	}

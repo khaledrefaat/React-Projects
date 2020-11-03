@@ -1,5 +1,6 @@
 import React from 'react';
-
+import AddBtn from './AddBtn';
+import './Form.css';
 class TodoInput extends React.Component {
 	state = { term: '' };
 
@@ -17,6 +18,7 @@ class TodoInput extends React.Component {
 						value={this.state.term}
 						onChange={e => this.setState({ term: e.target.value })}
 					/>
+					<AddBtn onClick={this.onFormSubmit} />
 				</form>
 			</div>
 		);
