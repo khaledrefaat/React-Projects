@@ -1,5 +1,9 @@
+form {
+	position: relative;
+}
+
 input {
-	width: 30rem;
+	width: 40rem;
 	height: 4rem;
 	margin-right: .5rem;
 	outline: none;
@@ -7,22 +11,28 @@ input {
 }
 
 .btn {
-	padding: 1.2rem 2rem;
+	padding: 1rem;
 	outline: none;
 	border: none;
 	color: #fff;
-	transform: translateY(0);
+	/* transform: translateY(0); */
 	transition: all .3s ease-out;
 }
 
 .btn:hover {box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);}
 
 .btn:active {
-	transform: translateY(3px);
-	box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+	/* transform: translateY(3px); */
+	/* box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1); */
 }
 
-.btn-add {background-color: #0abde3;}
+.btn-add {
+	background-color: #0abde3;
+	font-size: 2rem;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
 
 .btn-add:hover {background-color: #48dbfb;}
 
@@ -53,5 +63,6 @@ input {
 .btn-complete {
 	background-color: #27ae60;
 	margin: 0;
+	padding: .7rem 1rem;
 }
 .btn-complete:hover {background-color: #10ac84;}

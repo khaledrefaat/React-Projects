@@ -19,6 +19,9 @@
 
 .complete {
 	opacity: .5;
+}
+
+.complete > p {
 	text-decoration: line-through;
 }
 
