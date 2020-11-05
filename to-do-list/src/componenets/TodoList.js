@@ -3,11 +3,11 @@ import TodoItem from './TodoItem';
 import './TodoList.css';
 
 const TodoList = props => {
-	return (
-		<ul className="todo-list">
-			<TodoItem />
-		</ul>
-	);
+	const todo = props.todos.map(todo => {
+		return <TodoItem todo={todo} />;
+	});
+	console.log(props.todos);
+	return <ul className="todo-list">{todo}</ul>;
 };
 
 export default TodoList;
