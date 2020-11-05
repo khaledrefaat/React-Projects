@@ -5,8 +5,11 @@ import './App.css';
 class App extends React.Component {
 	state = { todos: [] };
 	onFormSubmit = term => {
-		let joined = this.state.todos.concat(term);
-		this.setState({ todos: joined });
+		let joined;
+		if (term) {
+			joined = this.state.todos.concat(term);
+			this.setState({ todos: joined });
+		}
 	};
 	render() {
 		return (
