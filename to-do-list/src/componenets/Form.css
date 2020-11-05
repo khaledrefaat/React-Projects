@@ -3,7 +3,7 @@ form {
 }
 
 input {
-	width: 30rem;
+	width: 40rem;
 	height: 4rem;
 	margin-right: .5rem;
 	outline: none;
@@ -63,5 +63,6 @@ input {
 .btn-complete {
 	background-color: #27ae60;
 	margin: 0;
+	padding: .7rem 1rem;
 }
 .btn-complete:hover {background-color: #10ac84;}
