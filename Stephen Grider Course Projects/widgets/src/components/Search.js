@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Search = () => {
-	const [ term, setTerm ] = useState('');
+	const [ term, setTerm ] = useState('programming');
 	const [ results, setResults ] = useState([]);
 
 	useEffect(
@@ -20,18 +20,23 @@ const Search = () => {
 				});
 				setResults(data.data.query.search);
 			};
-			const timeoutId = setTimeout(() => {
-				if (term) {
-					search();
-				}
-			}, 500);
+			if (term && !results.length) {
+				console.log(results.length);
+				search();
+			} else {
+				const timeoutId = setTimeout(() => {
+					if (term) {
+						search();
+					}
+				}, 500);
 
-			// this will run first
-			return () => {
-				clearTimeout(timeoutId);
-			};
+				// this will run first
+				return () => {
+					clearTimeout(timeoutId);
+				};
+			}
 		},
-		[ term ]
+		[ term, results.length ]
 	);
 
 	const renderedResults = results.map(result => {
@@ -53,7 +58,7 @@ const Search = () => {
 
 	return (
 		<div>
-			<div className="ui form form-custom">
+			<div className="ui form form-custom" style={{ margin: '10px 30px' }}>
 				<div className="field">
 					<label>Enter Search Term</label>
 					<input className="input" value={term} onChange={e => setTerm(e.target.value)} />
