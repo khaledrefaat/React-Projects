@@ -4,10 +4,23 @@ import axios from 'axios';
 const Search = () => {
 	const [ term, setTerm ] = useState('programming');
 	const [ results, setResults ] = useState([]);
+	const [ debouncedTerm, setDebouncedTerm ] = useState(term);
 
+	// everytime user inputs new value and stops for 1sec change the debouncedTerm value
 	useEffect(
 		() => {
-			// then run this code
+			const timerId = setTimeout(() => {
+				setDebouncedTerm(term);
+			}, 1000);
+			return () => {
+				clearTimeout(timerId);
+			};
+		},
+		[ term ]
+	);
+	// run this if the user refresh the page or debouncedTerm was Changed
+	useEffect(
+		() => {
 			const search = async () => {
 				const data = await axios.get('https://en.wikipedia.org/w/api.php', {
 					params: {
@@ -15,28 +28,14 @@ const Search = () => {
 						list: 'search',
 						origin: '*',
 						format: 'json',
-						srsearch: term
+						srsearch: debouncedTerm
 					}
 				});
 				setResults(data.data.query.search);
 			};
-			if (term && !results.length) {
-				console.log(results.length);
-				search();
-			} else {
-				const timeoutId = setTimeout(() => {
-					if (term) {
-						search();
-					}
-				}, 500);
-
-				// this will run first
-				return () => {
-					clearTimeout(timeoutId);
-				};
-			}
+			search();
 		},
-		[ term, results.length ]
+		[ debouncedTerm ]
 	);
 
 	const renderedResults = results.map(result => {
@@ -44,7 +43,8 @@ const Search = () => {
 			<div className="item" key={result.pageid}>
 				<div className="right floated content">
 					<a className="ui button" href={`https://en.wikipedia.org?curid=${result.pageid}`} target="blank">
-						{/* <a className="ui button" href={`https://en.wikipedia.org/wiki/${result.title.split(' ').join('_')}}`} target="blank"> */}
+						{/* this was my code */
+						/* <a className="ui button" href={`https://en.wikipedia.org/wiki/${result.title.split(' ').join('_')}}`} target="blank"> */}
 						GO
 					</a>
 				</div>
