@@ -34,12 +34,15 @@ const options = [
 
 const App = () => {
 	const [ selected, setSelected ] = useState(options[0]);
-
+	console.log(selected);
 	return (
 		<div>
 			{/* <Accordion items={items} /> */}
 			{/* <Search /> */}
 			<Dropdown options={options} selected={selected} onSelectedChange={setSelected} />
+			<p style={{ color: selected.value, textAlign: 'center', marginTop: '20px' }}>
+				My Color Is {selected.label}
+			</p>
 		</div>
 	);
 };

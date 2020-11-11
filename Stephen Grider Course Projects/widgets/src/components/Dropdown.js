@@ -5,11 +5,14 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
 	const ref = useRef();
 
 	useEffect(() => {
-		document.body.addEventListener('click', event => {
+		const onBodyClick = event => {
 			// run only if the click was outside the dropdown
 			if (ref.current.contains(event.target)) return;
 			setOpen(false);
-		});
+		};
+		document.body.addEventListener('click', onBodyClick);
+
+		return () => document.body.removeEventListener('click', onBodyClick);
 	}, []);
 
 	// loop over the options list and print them as dom
