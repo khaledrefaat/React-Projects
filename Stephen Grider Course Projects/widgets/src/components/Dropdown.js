@@ -7,7 +7,8 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
 	useEffect(() => {
 		const onBodyClick = event => {
 			// run only if the click was outside the dropdown
-			if (ref.current.contains(event.target)) return;
+			// ref.current here to fix a bug of (Cannot read property 'contains' of null)
+			if (ref.current && ref.current.contains(event.target)) return;
 			setOpen(false);
 		};
 		document.body.addEventListener('click', onBodyClick);
