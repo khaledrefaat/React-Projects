@@ -7,6 +7,7 @@ const SearchBar = ({ onFormSubmit }) => {
 	const onSubmit = event => {
 		event.preventDefault();
 		onFormSubmit(term);
+		console.log('runing');
 	};
 
 	return (
