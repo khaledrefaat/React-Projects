@@ -1,21 +1,19 @@
-import React from 'react';
-import TodoInput from './TodoInput';
+import React, { useState } from 'react';
+import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import './App.css';
-class App extends React.Component {
-	state = { todos: [] };
-	onFormSubmit = term => {
-		this.setState({ todos: [ ...this.state.todos, term ] });
+const App = () => {
+	const [ todos, setTodos ] = useState([]);
+	const onFormSubmit = term => {
+		setTodos([ ...todos, term ]);
 	};
-	render() {
-		return (
-			<div className="container">
-				<h1>Todo List</h1>
-				<TodoInput onFormSubmit={this.onFormSubmit} />
-				<TodoList todos={this.state.todos} />
-			</div>
-		);
-	}
-}
+	return (
+		<div className="container">
+			<h1>Todo List</h1>
+			<TodoForm onFormSubmit={onFormSubmit} />
+			<TodoList todos={todos} />
+		</div>
+	);
+};
 
 export default App;

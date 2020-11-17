@@ -1,10 +1,10 @@
 import React from 'react';
 import DeleteBtn from './DeleteBtn';
 import CompleteBtn from './CompleteBtn';
-const TodoItem = props => {
+const TodoItem = ({ todo }) => {
 	return (
 		<div className="todo">
-			<p>{props.todo}</p>
+			<p>{todo}</p>
 			<DeleteBtn />
 			<CompleteBtn />
 		</div>

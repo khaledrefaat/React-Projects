@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeleteBtn = props => {
+const DeleteBtn = () => {
 	const DeleteTodo = e => {
 		e.target.parentNode.classList.add('deleted');
 		setTimeout(() => {

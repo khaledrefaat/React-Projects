@@ -3,11 +3,13 @@ form {
 }
 
 input {
-	width: 40rem;
+	width: 100rem;
 	height: 4rem;
 	margin-right: .5rem;
 	outline: none;
 	font-size: 1.8rem;
+	border-radius: 4px;
+	border: none;
 }
 
 .btn {
@@ -15,7 +17,6 @@ input {
 	outline: none;
 	border: none;
 	color: #fff;
-	/* transform: translateY(0); */
 	transition: all .3s ease-out;
 }
 
@@ -27,19 +28,25 @@ input {
 }
 
 .btn-add {
-	background-color: #0abde3;
+	background-color: #341f97;
 	font-size: 2rem;
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: 1px;
 }
 
-.btn-add:hover {background-color: #48dbfb;}
+.btn-add:hover {background-color: #5f27cd;}
+/* 
+.btn-clear {
+	background-color: #341f97;
+	position: absolute;
+	top: 0;
+	right: -7rem;
+	font-size: 1.8rem;
+}
 
-/* .btn-clear {background-color: #341f97;} */
-
-/* .btn-clear:hover {background-color: #5f27cd;} */
-
+ .btn-clear:hover {background-color: #5f27cd;}
+ */
 
 
 .btn-delete,
@@ -65,4 +72,42 @@ input {
 	margin: 0;
 	padding: .7rem 1rem;
 }
-.btn-complete:hover {background-color: #10ac84;}
+.btn-complete:hover {background-color: #0fd3a2;}
+
+
+/* this is the div contains the select */
+.select {
+	margin-left: 1.5rem;
+	position: relative;
+	overflow: hidden;
+}
+
+/* this is the select itself */
+/* .filter-todo {
+	outline: none;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	color: #9980fa;
+	width: 15rem;
+	cursor: pointer;
+	padding: 1.5rem;
+}
+
+.select::after {
+	content: "\25BC";
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 1.6rem;
+	pointer-events: none;
+	background-color: #9980fa;
+	transition: all .3s ease;
+	/* font-size: 12px; */
+}
+/*
+.select:hover::after {
+	background-color: #fff;
+	color: #9980fa;
+} */
