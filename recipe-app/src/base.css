@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; /* 10px = 1rem */
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.6;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    /* background-image: linear-gradient(to left bottom, #27ae60, #3498db); */
+}

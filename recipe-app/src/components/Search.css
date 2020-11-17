@@ -1,0 +1,9 @@
+.search {
+    margin: 3rem;
+}
+
+.search-input {
+    height: 4rem;
+    font-size: 1.6rem;
+    outline: none;
+}
