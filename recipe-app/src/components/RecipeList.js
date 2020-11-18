@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
 import './RecipeList.css';
 
 const RecipeList = ({ recipes, recipeClicked }) => {
 	const [ page, setPage ] = useState(1);
+
+	useEffect(
+		() => {
+			setPage(1);
+		},
+		[ recipes ]
+	);
 
 	const onRecipeClick = id => recipeClicked(id);
 
