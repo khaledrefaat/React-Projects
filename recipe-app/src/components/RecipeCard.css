@@ -1,9 +1,14 @@
 .recipe-card {
     width: 18rem;
+    margin: .5rem;
+    padding: 0;
+    cursor: pointer;
+    /* border: none; */
 }
 
 .recipe-card img {
-    height: 15rem;
+    height: 12rem;
+    width: 100%;
 }
 
 
