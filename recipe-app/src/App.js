@@ -5,14 +5,14 @@ import RecipeDetail from './components/RecipeDetail';
 import './base.css';
 
 const App = () => {
-	const [ term, setTerm ] = useState('pizza');
+	const [ term, setTerm ] = useState('');
 	const [ recipes, setRecipes ] = useState([]);
 	const [ recipeId, setRecipeId ] = useState(null);
 	const [ selectedRecipe, setSelectedRecipe ] = useState(null);
 
 	useEffect(
 		() => {
-			Search(term);
+			if (term) Search(term);
 		},
 		[ term ]
 	);

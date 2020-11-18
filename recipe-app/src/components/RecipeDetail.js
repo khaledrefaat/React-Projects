@@ -2,9 +2,15 @@ import React from 'react';
 
 const RecipeDetail = ({ selectedRecipe }) => {
 	if (selectedRecipe) {
-		const ingredients = selectedRecipe['ingredients'].map(ingredient => {
-			return <li className="list-group-item">{ingredient}</li>;
+		const ingredients = selectedRecipe['ingredients'].map((ingredient, index) => {
+			return (
+				<li className="list-group-item" key={index}>
+					{ingredient}
+				</li>
+			);
 		});
+
+		console.log(selectedRecipe);
 
 		return (
 			<div className="card">

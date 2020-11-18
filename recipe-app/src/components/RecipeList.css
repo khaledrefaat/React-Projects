@@ -1,0 +1,10 @@
+.recipe-list {
+    position: relative;
+}
+
+.btn-toggle {
+    position: absolute;
+    bottom: -3rem;
+    right: 50%;
+    transform: translateX(50%);
+}
