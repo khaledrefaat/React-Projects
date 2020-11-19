@@ -24,8 +24,6 @@ const App = () => {
 		[ recipeId ]
 	);
 
-	// functions
-
 	const Search = async term => {
 		const response = await fetch(`https://forkify-api.herokuapp.com/api/search?q=${term}`);
 		const { recipes } = await response.json();
@@ -58,5 +56,3 @@ const App = () => {
 };
 
 export default App;
-
-// https://forkify-api.herokuapp.com/api/get?rId=35478

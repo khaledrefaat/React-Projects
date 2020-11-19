@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
 import './RecipeList.css';
 
+const recipePerPage = 12;
+
 const RecipeList = ({ recipes, recipeClicked }) => {
 	const [ page, setPage ] = useState(1);
 
@@ -25,25 +27,25 @@ const RecipeList = ({ recipes, recipeClicked }) => {
 					{i}
 				</button>
 			);
-			recipesLength -= 12;
+			recipesLength -= recipePerPage;
 		}
 		return domButtons;
 	};
 
 	const recipesList = recipes.map(({ image_url, publisher, title, recipe_id }, index) => {
-		let recipeCard = (
-			<RecipeCard
-				imageUrl={image_url}
-				publisher={publisher}
-				title={title}
-				onRecipeClick={onRecipeClick}
-				id={recipe_id}
-				key={recipe_id}
-			/>
-		);
-		if (page === 1 && index <= 11) return recipeCard;
-		else if (page === 2 && index >= 12 && index < 24) return recipeCard;
-		else if (page === 3 && index >= 24) return recipeCard;
+		// render 12 recipes per page
+		if ((index > (page - 1) * recipePerPage && index < page * recipePerPage) || index === 0) {
+			return (
+				<RecipeCard
+					imageUrl={image_url}
+					publisher={publisher}
+					title={title}
+					onRecipeClick={onRecipeClick}
+					id={recipe_id}
+					key={recipe_id}
+				/>
+			);
+		}
 		return null;
 	});
 	console.log(recipes);
