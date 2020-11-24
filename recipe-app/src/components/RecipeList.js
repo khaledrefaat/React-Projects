@@ -48,7 +48,6 @@ const RecipeList = ({ recipes, recipeClicked }) => {
 		}
 		return null;
 	});
-	console.log(recipes);
 	return (
 		<div className="row recipe-list">
 			{recipesList}
