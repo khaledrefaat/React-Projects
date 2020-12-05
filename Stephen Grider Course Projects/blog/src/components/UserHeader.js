@@ -9,8 +9,6 @@ class UserHeader extends Component {
 
 	render() {
 		const { user } = this.props;
-		console.log(user);
-		// console.log(this.props.users);
 		if (!user) return null;
 		return (
 			<h4 className="card-title post-header" style={{ fontWeight: '700}' }}>

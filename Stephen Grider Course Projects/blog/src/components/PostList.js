@@ -24,7 +24,6 @@ class PostList extends Component {
 	}
 
 	render() {
-		console.log(this.props.posts);
 		return <div className="list-group list-group-flush">{this.renderList()}</div>;
 	}
 }
