@@ -1,0 +1,16 @@
+
+.heading-1,
+.heading-2,
+.heading-3 {
+    text-transform: capitalize;
+    font-family: 'Racing Sans One', cursive;
+    margin: 0;
+}
+
+.heading-1 {
+    font-size: 9rem;
+}
+
+.heading-2 {
+    font-size: 4rem;
+}
