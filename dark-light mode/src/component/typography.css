@@ -9,6 +9,7 @@
 
 .heading-1 {
     font-size: 9rem;
+    height: fit-content !important;
 }
 
 .heading-2 {
