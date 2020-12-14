@@ -1,7 +1,6 @@
 .column {
     width: fit-content !important;
     height: fit-content !important;
-    cursor: pointer
 }
 
 .card-container {
@@ -9,7 +8,7 @@
     border: 1px solid var(--secondary-color) !important;
     border-radius: 5px !important;
     padding: 1rem !important;
-
+    cursor: pointer;
     text-align: center;
 }
 
