@@ -5,6 +5,7 @@ import Nav from './Nav';
 import Home from './Home';
 import Undraw from './Undraw';
 import Buttons from './Buttons';
+import Contact from './Contact';
 // import Nav from './Home';
 const App = () => {
 	return (
@@ -13,6 +14,7 @@ const App = () => {
 			<Home />
 			<Undraw />
 			<Buttons />
+			<Contact />
 		</div>
 	);
 };

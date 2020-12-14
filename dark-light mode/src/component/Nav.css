@@ -1,6 +1,7 @@
 .list {
     position: fixed;
     top: 3rem;
+    z-index: 2;
 }
 
 nav .list-item {
