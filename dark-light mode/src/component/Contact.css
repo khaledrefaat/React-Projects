@@ -4,12 +4,25 @@
 }
 
 .icon-i {
-    margin: 2rem;
-    font-size: 10rem;
+    margin: 1rem;
+    font-size: 5rem;
     color: var(--primary-color);
     transition: color .3s ease-out;
 }
 
 .icon-i:hover {
     color: var(--on-background);
+}
+
+@media screen and (min-width: 31.5em) { /* 500px */
+    .icon-i {
+        font-size: 7rem;
+        margin: 2rem;
+    }
+}
+
+@media screen and (min-width: 40.625em) { /* 650px */
+    .icon-i {
+        font-size: 10rem;
+    }
 }
