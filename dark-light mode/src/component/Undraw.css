@@ -1,6 +1,15 @@
+.column-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column
+}
+
+
 .column {
     width: fit-content !important;
     height: fit-content !important;
+    margin: 2rem 0;
 }
 
 .card-container {
@@ -10,6 +19,7 @@
     padding: 1rem !important;
     cursor: pointer;
     text-align: center;
+    background-color: var(--background) !important;
 }
 
 .image-container {
@@ -28,4 +38,28 @@
 }
 .card-container .content a {
     color: var(--on-background) !important;
+}
+
+@media screen and (min-width: 43.75em) { /* 700px */
+    .column {
+        width: 25rem !important;
+        margin: 2rem;
+    }
+
+    .column-container {
+        flex-direction: row;
+    }
+}
+
+
+@media screen and (min-width: 50em) { /* 800px */
+    .column {
+        width: 30rem !important;
+    }
+}
+  
+ @media screen and (min-width: 62.5em) { /* 1000px */
+    .column {
+        width: fit-content !important;
+    }
 }

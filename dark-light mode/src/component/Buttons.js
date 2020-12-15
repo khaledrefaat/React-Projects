@@ -3,15 +3,15 @@ import './Buttons.css';
 
 const Buttons = () => {
 	return (
-		<section className="buttons">
+		<section className="buttons" id="buttons">
 			<h1 className="heading-1">buttons</h1>
 			<div className="buttons-container">
-				<button class="ui btn btn-primary button">primary</button>
-				<button class="ui btn btn-secondary button">secondary</button>
-				<button class="ui btn btn-disabled button">disabled</button>
-				<button class="ui btn btn-outline button">outline</button>
-				<button class="ui btn btn-alt-outline button">alt outline</button>
-				<button class="ui btn btn-disabled button">disabled</button>
+				<button className="ui btn btn-primary button">primary</button>
+				<button className="ui btn btn-secondary button">secondary</button>
+				<button className="ui btn btn-disabled button">disabled</button>
+				<button className="ui btn btn-outline button">outline</button>
+				<button className="ui btn btn-alt-outline button">alt outline</button>
+				<button className="ui btn btn-disabled button">disabled</button>
 			</div>
 			<div className="ui segment paragraph-container">
 				<p>

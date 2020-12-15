@@ -5,14 +5,35 @@
     text-transform: capitalize;
     font-family: 'Racing Sans One', cursive;
     margin: 0;
+    text-align: center;
 }
 
 .heading-1 {
-    font-size: 9rem;
+    font-size: 5rem;
     height: fit-content !important;
 }
 
 .heading-2 {
-    font-size: 4rem;
+    font-size: 2rem;
     color: var(--on-background-alt)
+}
+
+@media screen and (min-width: 37.5em) { /* 600px */
+    .heading-1 {
+        font-size: 7rem;
+    }
+    
+    .heading-2 {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (min-width: 50em) { /* 800px */
+    .heading-1 {
+        font-size: 9rem;
+    }
+    
+    .heading-2 {
+        font-size: 4rem;
+    }
 }
