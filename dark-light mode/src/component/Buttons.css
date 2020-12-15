@@ -52,5 +52,5 @@
 
 .paragraph-container p {
     font-size: 1.4rem;
-    color: var(--on-primary);
+    color: var(--on-background);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Nav.css';
 
-const Nav = () => {
+const Nav = ({ onCheck }) => {
 	return (
 		<nav className="ui secondary menu list">
 			<a href="#" className="item list-item">
@@ -22,7 +22,7 @@ const Nav = () => {
 					<i className="fas fa-sun" />
 				</span>
 				<label className="theme-switch">
-					<input type="checkbox" />
+					<input type="checkbox" onClick={() => onCheck()} />
 					<div className="slider round" />
 				</label>
 			</div>
