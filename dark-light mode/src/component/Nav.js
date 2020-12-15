@@ -1,7 +1,7 @@
 import React from 'react';
 import './Nav.css';
 
-const Nav = ({ onCheck }) => {
+const Nav = ({ onCheck, isDark }) => {
 	return (
 		<nav className="ui secondary menu list">
 			<a href="#" className="item list-item">
@@ -18,8 +18,8 @@ const Nav = ({ onCheck }) => {
 			</a>
 			<div className="right menu switch-container">
 				<span id="toggle-icon" className="ui item">
-					light mode
-					<i className="fas fa-sun" />
+					{isDark ? 'dark mode' : 'light mode'}
+					<i className={isDark ? 'fas fa-moon' : 'fas fa-sun'} />
 				</span>
 				<label className="theme-switch">
 					<input type="checkbox" onClick={() => onCheck()} />

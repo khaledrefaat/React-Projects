@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import './typography.css';
 import Nav from './Nav';
@@ -19,17 +19,13 @@ const App = () => {
 		[ isBoxChecked ]
 	);
 
-	const onCheck = () => {
-		setisBoxChecked(!isBoxChecked);
-	};
-
-	console.log(isBoxChecked);
+	const onCheck = () => setisBoxChecked(!isBoxChecked);
 
 	return (
 		<div>
-			<Nav onCheck={onCheck} />
+			<Nav onCheck={onCheck} isDark={isBoxChecked} />
 			<Home />
-			<Undraw />
+			<Undraw isDark={isBoxChecked} />
 			<Buttons />
 			<Contact />
 		</div>

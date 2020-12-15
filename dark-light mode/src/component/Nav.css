@@ -27,6 +27,7 @@ nav .list-item:hover {
     margin-right: 1rem;
     font-size: 1.6rem;
     text-transform: capitalize !important;
+    color: var(--on-background) !important;
 }
 
 span i {

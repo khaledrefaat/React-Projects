@@ -10,6 +10,7 @@
     padding: 1rem !important;
     cursor: pointer;
     text-align: center;
+    background-color: var(--background) !important;
 }
 
 .image-container {
