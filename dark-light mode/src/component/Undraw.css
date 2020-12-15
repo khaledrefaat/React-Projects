@@ -1,6 +1,14 @@
+.column-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .column {
     width: fit-content !important;
     height: fit-content !important;
+    margin: 2rem;
 }
 
 .card-container {

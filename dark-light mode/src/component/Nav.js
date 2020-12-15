@@ -4,16 +4,16 @@ import './Nav.css';
 const Nav = ({ onCheck, isDark }) => {
 	return (
 		<nav className="ui secondary menu list">
-			<a href="#" className="item list-item">
+			<a href="#home" className="item list-item">
 				home
 			</a>
-			<a href="#" className="item list-item">
+			<a href="#undraw" className="item list-item">
 				ِabout
 			</a>
-			<a href="#" className="item list-item">
+			<a href="#buttons" className="item list-item">
 				projects
 			</a>
-			<a href="#" className="item list-item">
+			<a href="#contact" className="item list-item">
 				contact
 			</a>
 			<div className="right menu switch-container">

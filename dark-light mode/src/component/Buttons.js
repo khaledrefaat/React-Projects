@@ -3,7 +3,7 @@ import './Buttons.css';
 
 const Buttons = () => {
 	return (
-		<section className="buttons">
+		<section className="buttons" id="buttons">
 			<h1 className="heading-1">buttons</h1>
 			<div className="buttons-container">
 				<button className="ui btn btn-primary button">primary</button>
