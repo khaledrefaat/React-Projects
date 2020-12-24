@@ -7,6 +7,11 @@ import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
 import Header from './Header';
 
+// Client Id
+// 1038514144547-07qi5pk03rfojcni9u4n914vvffslpkr.apps.googleusercontent.com
+// Client Secret
+// 4F3-tRfLb8OKB8mGIYviSSX4
+
 const App = () => {
 	return (
 		<div>
