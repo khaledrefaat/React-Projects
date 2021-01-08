@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { fetchStreams } from "../../actions";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { fetchStreams } from '../../actions';
+import { connect } from 'react-redux';
 
 class StreamList extends Component {
     componentDidMount() {
@@ -32,7 +32,7 @@ class StreamList extends Component {
     renderCreateStream() {
         if (this.props.isUserSignedIn)
             return (
-                <div style={{ textAlign: "right" }}>
+                <div style={{ textAlign: 'right' }}>
                     <Link to="/streams/new" className="ui button primary">
                         Create Stream
                     </Link>
