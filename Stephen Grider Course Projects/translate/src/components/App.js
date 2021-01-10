@@ -1,12 +1,20 @@
 import React from 'react';
 import UserCreate from './UserCreate';
-import LanguageContext from '../contexts/LanguageContext';
-import ColorContext from '../contexts/ColorContext';
+import { connect } from 'react-redux';
+import { selectlanguage, selectColor } from '../actions';
 
 class App extends React.Component {
     state = { language: 'arabic' };
 
-    onLanguageChange = language => this.setState({ language });
+    onLanguageChange = language => {
+        this.setState({ language });
+    };
+
+    componentDidUpdate() {
+        this.props.selectlanguage(this.state.language);
+        const color = this.state.language === 'arabic' ? 'red' : 'primary';
+        this.props.selectColor(color);
+    }
 
     render() {
         return (
@@ -23,14 +31,10 @@ class App extends React.Component {
                         onClick={() => this.onLanguageChange('english')}
                     />
                 </div>
-                <ColorContext.Provider value="red">
-                    <LanguageContext.Provider value={this.state.language}>
-                        <UserCreate />
-                    </LanguageContext.Provider>
-                </ColorContext.Provider>
+                <UserCreate />
             </div>
         );
     }
 }
 
-export default App;
+export default connect(null, { selectlanguage, selectColor })(App);

@@ -1,25 +1,25 @@
 import React from 'react';
-import LangugageContext from '../contexts/LanguageContext';
-import ColorContext from '../contexts/ColorContext';
+import { connect } from 'react-redux';
+import { selectlanguage, selectColor } from '../actions';
 
 class Button extends React.Component {
-    renderButton(color) {
-        return (
-            <button className={`ui button ${color}`}>
-                <LangugageContext.Consumer>
-                    {value => (value === 'arabic' ? 'إرسال' : 'Submit')}
-                </LangugageContext.Consumer>
-            </button>
-        );
+    renderText() {
+        return this.props.language === 'arabic' ? 'ارسل' : 'submit';
     }
 
     render() {
         return (
-            <ColorContext.Consumer>
-                {color => this.renderButton(color)}
-            </ColorContext.Consumer>
+            <button className={`ui button ${this.props.color}`}>
+                {this.renderText()}
+            </button>
         );
     }
 }
 
-export default Button;
+const mapStateToProps = state => {
+    return { language: state.language.language, color: state.color.color };
+};
+
+export default connect(mapStateToProps, { selectlanguage, selectColor })(
+    Button
+);

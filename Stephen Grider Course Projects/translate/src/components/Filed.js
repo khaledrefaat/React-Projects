@@ -1,22 +1,24 @@
 import React from 'react';
-import LanguageContext from '../contexts/LanguageContext';
-import LangugageContext from '../contexts/LanguageContext';
+import { connect } from 'react-redux';
+import { selectlanguage } from '../actions';
 
 class Field extends React.Component {
-    static contextType = LangugageContext;
+    renderText() {
+        return this.props.language === 'arabic' ? 'الاسم' : 'Name';
+    }
 
     render() {
         return (
             <div className="ui field">
-                <label>
-                    <LanguageContext.Consumer>
-                        {value => (value === 'arabic' ? 'الاسم' : 'Name')}
-                    </LanguageContext.Consumer>
-                </label>
+                <label>{this.renderText()}</label>
                 <input />
             </div>
         );
     }
 }
 
-export default Field;
+const mapStateToProps = state => {
+    return { language: state.language.language };
+};
+
+export default connect(mapStateToProps, selectlanguage)(Field);
