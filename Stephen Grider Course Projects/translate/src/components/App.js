@@ -1,15 +1,17 @@
 import React from 'react';
+import UserCreate from './UserCreate';
+import LanguageContext from '../contexts/LanguageContext';
+import ColorContext from '../contexts/ColorContext';
 
 class App extends React.Component {
-    state = { langauge: 'arabic' };
+    state = { language: 'arabic' };
 
-    onLanguageChange = langauge => this.setState({ langauge });
+    onLanguageChange = language => this.setState({ language });
 
     render() {
         return (
             <div className="ui container">
                 <div>
-                    Select a langauge:
                     <i
                         className="flag eg"
                         style={{ cursor: 'pointer' }}
@@ -20,8 +22,12 @@ class App extends React.Component {
                         style={{ cursor: 'pointer' }}
                         onClick={() => this.onLanguageChange('english')}
                     />
-                    <h1>Selected Language Is: {this.state.langauge}</h1>
                 </div>
+                <ColorContext.Provider value="red">
+                    <LanguageContext.Provider value={this.state.language}>
+                        <UserCreate />
+                    </LanguageContext.Provider>
+                </ColorContext.Provider>
             </div>
         );
     }
