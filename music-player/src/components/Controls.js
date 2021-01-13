@@ -7,12 +7,17 @@ class Controls extends React.Component {
     state = { isPlaying: false, currentIndex: 0 };
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.isPlaying !== prevState.isPlaying) {
+        // let reduxStore knows playbutton was clicked and audio should play
+        if (this.state.isPlaying !== prevState.isPlaying)
             this.props.isAudioPlaying(this.state.isPlaying);
-        }
-        if (prevState.currentIndex !== this.state.currentIndex) {
+
+        // change the currentIndex of audio and img
+        if (prevState.currentIndex !== this.state.currentIndex)
             this.props.currentIndex(this.state.currentIndex);
-        }
+
+        // if the current audio ended go to the next one
+        if (this.props.isEnded && this.props.isEnded !== prevProps.isEnded)
+            this.updateCurrentIndex(1);
     }
 
     updateCurrentIndex = value => {
@@ -34,6 +39,10 @@ class Controls extends React.Component {
     };
 
     render() {
+        const playClass = `fas fa-${
+            this.state.isPlaying ? 'pause' : 'play'
+        } main-button`;
+
         return (
             <div className="player-controls">
                 <i
@@ -42,7 +51,7 @@ class Controls extends React.Component {
                     onClick={() => this.updateCurrentIndex(-1)}
                 />
                 <i
-                    className="fas fa-play main-button"
+                    className={playClass}
                     title="play"
                     onClick={() => this.onPlayButton()}
                 />
