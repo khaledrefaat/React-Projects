@@ -4,3 +4,10 @@ export const isAudioPlaying = isPlaying => {
         payload: isPlaying,
     };
 };
+
+export const currentIndex = index => {
+    return {
+        type: 'CURRENT_INDEX',
+        payload: index,
+    };
+};

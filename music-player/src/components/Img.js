@@ -1,12 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { currentIndex } from '../actions';
 import './Img.css';
 
-const Img = () => {
-    return (
-        <div className="img-container">
-            <img src="/img/jacinto-1.jpg" alt="Album Art" />
-        </div>
-    );
+class Img extends React.Component {
+    render() {
+        return (
+            <div className="img-container">
+                <img
+                    src={this.props.imgList[this.props.currentImg]}
+                    alt="Album Art"
+                />
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+    return { currentImg: state.currentIndex.index, imgList: state.imgList };
 };
 
-export default Img;
+export default connect(mapStateToProps, { currentIndex })(Img);

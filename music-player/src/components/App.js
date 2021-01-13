@@ -3,7 +3,7 @@ import Img from './Img';
 import Progress from './Progress';
 import Controls from './Controls';
 import { connect } from 'react-redux';
-import { isAudioPlaying } from '../actions';
+import { isAudioPlaying, currentIndex } from '../actions';
 import './App.css';
 
 class App extends React.Component {
@@ -14,11 +14,11 @@ class App extends React.Component {
     render() {
         return (
             <div className="player-container">
-                <Img />
+                <Img img={this.props.imgList} />
                 <h2 id="title">Electric Chilll Machine</h2>
                 <h3 id="artist">Jacinto</h3>
                 <audio
-                    src="/music/jacinto-1.mp3"
+                    src={this.props.musicList[this.props.currentAudio]}
                     ref={ref => (this.player = ref)}
                 />
                 <Progress />
@@ -29,7 +29,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { isPlaying: state.isPlaying.isAudioPlaying };
+    return {
+        isPlaying: state.isPlaying.isAudioPlaying,
+        musicList: state.musicList,
+        imgList: state.imgList,
+        currentAudio: state.currentIndex.index,
+    };
 };
 
-export default connect(mapStateToProps, { isAudioPlaying })(App);
+export default connect(mapStateToProps, { isAudioPlaying, currentIndex })(App);
