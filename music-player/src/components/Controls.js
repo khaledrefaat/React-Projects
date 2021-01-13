@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { isAudioPlaying, currentIndex } from '../actions';
+import { isAudioPlaying, currentIndex, onAudioEnded } from '../actions';
 import './Controls.css';
 
 class Controls extends React.Component {
@@ -66,9 +66,11 @@ class Controls extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { musicList: state.musicList };
+    return { musicList: state.musicList, isEnded: state.isAudioEnded.isEnded };
 };
 
-export default connect(mapStateToProps, { isAudioPlaying, currentIndex })(
-    Controls
-);
+export default connect(mapStateToProps, {
+    isAudioPlaying,
+    currentIndex,
+    onAudioEnded,
+})(Controls);

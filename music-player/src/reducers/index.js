@@ -1,8 +1,13 @@
 import { combineReducers } from 'redux';
+import {
+    CURRENT_INDEX,
+    ON_AUDIO_ENDED,
+    IS_AUDIO_PLAYING,
+} from '../actions/types';
 
 const isAudioPlayingReducer = (state = { isAudioPlaying: false }, action) => {
     switch (action.type) {
-        case 'IS_AUDIO_PLAYING':
+        case IS_AUDIO_PLAYING:
             return { ...state, isAudioPlaying: action.payload };
         default:
             return state;
@@ -11,8 +16,17 @@ const isAudioPlayingReducer = (state = { isAudioPlaying: false }, action) => {
 
 const indexReducer = (state = { index: 0 }, action) => {
     switch (action.type) {
-        case 'CURRENT_INDEX':
+        case CURRENT_INDEX:
             return { ...state, index: action.payload };
+        default:
+            return state;
+    }
+};
+
+const onAudioEndedReducer = (state = { isEnded: false }, action) => {
+    switch (action.type) {
+        case ON_AUDIO_ENDED:
+            return { ...state, isEnded: action.payload };
         default:
             return state;
     }
@@ -36,4 +50,5 @@ export default combineReducers({
     musicList: musicListSrc,
     imgList: imgListSrc,
     currentIndex: indexReducer,
+    isAudioEnded: onAudioEndedReducer,
 });
