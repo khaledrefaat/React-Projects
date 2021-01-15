@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { currentIndex } from '../actions';
 import './Img.css';
 
 class Img extends React.Component {
@@ -8,7 +7,9 @@ class Img extends React.Component {
         return (
             <div className="img-container">
                 <img
-                    src={this.props.imgList[this.props.currentImg]}
+                    src={`/img/${
+                        this.props.songs[this.props.currentIndex].name
+                    }.jpg`}
                     alt="Album Art"
                 />
             </div>
@@ -17,7 +18,7 @@ class Img extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { currentImg: state.currentIndex.index, imgList: state.imgList };
+    return { currentIndex: state.currentIndex.index, songs: state.songs };
 };
 
-export default connect(mapStateToProps, { currentIndex })(Img);
+export default connect(mapStateToProps)(Img);

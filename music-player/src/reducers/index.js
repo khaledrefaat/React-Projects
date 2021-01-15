@@ -14,7 +14,7 @@ const isAudioPlayingReducer = (state = {}, action) => {
     }
 };
 
-const indexReducer = (state = {}, action) => {
+const indexReducer = (state = { index: 0 }, action) => {
     switch (action.type) {
         case CURRENT_INDEX:
             return { ...state, index: action.payload };
@@ -32,23 +32,32 @@ const onAudioEndedReducer = (state = {}, action) => {
     }
 };
 
-const musicListSrc = () => [
-    '/music/jacinto-1.mp3',
-    '/music/jacinto-2.mp3',
-    '/music/jacinto-3.mp3',
-    '/music/metric-1.mp3',
-];
-const imgListSrc = () => [
-    '/img/jacinto-1.jpg',
-    '/img/jacinto-2.jpg',
-    '/img/jacinto-3.jpg',
-    '/img/metric-1.jpg',
+const songs = () => [
+    {
+        name: 'jacinto-1',
+        displayName: 'Electric Chill Machine',
+        artist: 'Jacinto Design',
+    },
+    {
+        name: 'jacinto-2',
+        displayName: 'Seven Nation Army (Remix)',
+        artist: 'Jacinto Design',
+    },
+    {
+        name: 'jacinto-3',
+        displayName: 'Goodnight, Disco Queen',
+        artist: 'Jacinto Design',
+    },
+    {
+        name: 'metric-1',
+        displayName: 'Front Row (Remix)',
+        artist: 'Metric/Jacinto Design',
+    },
 ];
 
 export default combineReducers({
     isPlaying: isAudioPlayingReducer,
-    musicList: musicListSrc,
-    imgList: imgListSrc,
+    songs,
     currentIndex: indexReducer,
     isAudioEnded: onAudioEndedReducer,
 });

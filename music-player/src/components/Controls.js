@@ -29,11 +29,11 @@ class Controls extends React.Component {
         let oldIndex = this.state.currentIndex;
         if (
             value > 0 &&
-            this.state.currentIndex >= this.props.musicList.length - 1
+            this.state.currentIndex >= this.props.songs.length - 1
         ) {
             this.setState({ currentIndex: 0 });
         } else if (value < 0 && this.state.currentIndex === 0) {
-            this.setState({ currentIndex: this.props.musicList.length - 1 });
+            this.setState({ currentIndex: this.props.songs.length - 1 });
         } else {
             this.setState({ currentIndex: (oldIndex += value) });
         }
@@ -71,7 +71,7 @@ class Controls extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { musicList: state.musicList, isEnded: state.isAudioEnded.isEnded };
+    return { songs: state.songs, isEnded: state.isAudioEnded.isEnded };
 };
 
 export default connect(mapStateToProps, {

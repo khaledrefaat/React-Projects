@@ -3,7 +3,7 @@ import Img from './Img';
 import Progress from './Progress';
 import Controls from './Controls';
 import { connect } from 'react-redux';
-import { isAudioPlaying, currentIndex, onAudioEnded } from '../actions';
+import { isAudioPlaying, onAudioEnded } from '../actions';
 import './App.css';
 
 class App extends React.Component {
@@ -15,19 +15,16 @@ class App extends React.Component {
     };
 
     componentDidUpdate(pervProps, pervState) {
-        this.props.isPlaying ? this.player.play() : this.player.pause();
+        this.props.isPlaying ? this.playVideo() : this.pauseVideo();
 
         if (this.state.isEnded !== pervState.isEnded) {
             this.props.onAudioEnded(this.state.isEnded);
         }
 
         // if the current audio changed reset the ended state to false and play the next audio and wait 0.2sec to let the audio loads
-        if (
-            pervProps.currentAudio !== this.props.currentAudio &&
-            pervProps.currentAudio === {}
-        ) {
+        if (pervProps.currentIndex !== this.props.currentIndex) {
             this.setState({ isEnded: false });
-            setTimeout(() => this.player.play(), 200);
+            setTimeout(this.playVideo, 150);
         }
     }
 
@@ -45,14 +42,19 @@ class App extends React.Component {
         }
     };
 
+    playVideo = () => this.player.play();
+
+    pauseVideo = () => this.player.pause();
+
     render() {
+        const cuurentSong = this.props.songs[this.props.currentIndex];
         return (
             <div className="player-container">
-                <Img img={this.props.imgList} />
-                <h2 id="title">Electric Chilll Machine</h2>
-                <h3 id="artist">Jacinto</h3>
+                <Img />
+                <h2 id="title">{cuurentSong.displayName}</h2>
+                <h3 id="artist">{cuurentSong.artist}</h3>
                 <audio
-                    src={this.props.musicList[this.props.currentAudio]}
+                    src={`/music/${cuurentSong.name}.mp3`}
                     ref={ref => (this.player = ref)}
                     onEnded={this.onAudioEnd}
                     onTimeUpdate={this.onTimeUpdate}
@@ -61,6 +63,7 @@ class App extends React.Component {
                     progress={this.state.progressPercent}
                     duration={this.state.duration}
                     currentTime={this.state.currentTime}
+                    audioPlayer={this.player}
                 />
                 <Controls />
             </div>
@@ -71,14 +74,12 @@ class App extends React.Component {
 const mapStateToProps = state => {
     return {
         isPlaying: state.isPlaying.isAudioPlaying,
-        musicList: state.musicList,
-        imgList: state.imgList,
-        currentAudio: state.currentIndex.index,
+        songs: state.songs,
+        currentIndex: state.currentIndex.index,
     };
 };
 
 export default connect(mapStateToProps, {
-    isAudioPlaying,
-    currentIndex,
     onAudioEnded,
+    isAudioPlaying,
 })(App);
