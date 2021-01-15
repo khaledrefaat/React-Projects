@@ -5,7 +5,7 @@ import {
     IS_AUDIO_PLAYING,
 } from '../actions/types';
 
-const isAudioPlayingReducer = (state = { isAudioPlaying: false }, action) => {
+const isAudioPlayingReducer = (state = {}, action) => {
     switch (action.type) {
         case IS_AUDIO_PLAYING:
             return { ...state, isAudioPlaying: action.payload };
@@ -14,7 +14,7 @@ const isAudioPlayingReducer = (state = { isAudioPlaying: false }, action) => {
     }
 };
 
-const indexReducer = (state = { index: 0 }, action) => {
+const indexReducer = (state = {}, action) => {
     switch (action.type) {
         case CURRENT_INDEX:
             return { ...state, index: action.payload };
@@ -23,7 +23,7 @@ const indexReducer = (state = { index: 0 }, action) => {
     }
 };
 
-const onAudioEndedReducer = (state = { isEnded: false }, action) => {
+const onAudioEndedReducer = (state = {}, action) => {
     switch (action.type) {
         case ON_AUDIO_ENDED:
             return { ...state, isEnded: action.payload };

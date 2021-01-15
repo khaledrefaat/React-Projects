@@ -6,6 +6,11 @@ import './Controls.css';
 class Controls extends React.Component {
     state = { isPlaying: false, currentIndex: 0 };
 
+    componentDidMount() {
+        this.props.isAudioPlaying(this.state.isPlaying);
+        this.props.currentIndex(this.state.currentIndex);
+    }
+
     componentDidUpdate(prevProps, prevState) {
         // let reduxStore knows playbutton was clicked and audio should play
         if (this.state.isPlaying !== prevState.isPlaying)

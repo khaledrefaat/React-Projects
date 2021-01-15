@@ -7,7 +7,12 @@ import { isAudioPlaying, currentIndex, onAudioEnded } from '../actions';
 import './App.css';
 
 class App extends React.Component {
-    state = { isEnded: false };
+    state = {
+        isEnded: false,
+        progressPercent: 0,
+        currentTime: '0:00',
+        duration: '0:00',
+    };
 
     componentDidUpdate(pervProps, pervState) {
         this.props.isPlaying ? this.player.play() : this.player.pause();
@@ -17,7 +22,10 @@ class App extends React.Component {
         }
 
         // if the current audio changed reset the ended state to false and play the next audio and wait 0.2sec to let the audio loads
-        if (pervProps.currentAudio !== this.props.currentAudio) {
+        if (
+            pervProps.currentAudio !== this.props.currentAudio &&
+            pervProps.currentAudio === {}
+        ) {
             this.setState({ isEnded: false });
             setTimeout(() => this.player.play(), 200);
         }
@@ -28,11 +36,16 @@ class App extends React.Component {
     onTimeUpdate = e => {
         if (this.props.isPlaying) {
             const { duration, currentTime } = e.nativeEvent.srcElement;
+            // setState for music values
+            this.setState({
+                progressPercent: (currentTime / duration) * 100,
+                currentTime,
+                duration,
+            });
         }
     };
 
     render() {
-        console.log(this.player);
         return (
             <div className="player-container">
                 <Img img={this.props.imgList} />
@@ -43,9 +56,13 @@ class App extends React.Component {
                     ref={ref => (this.player = ref)}
                     onEnded={this.onAudioEnd}
                     onTimeUpdate={this.onTimeUpdate}
-                    controls
                 />
-                <Progress />
+                <Progress
+                    progress={this.state.progressPercent}
+                    duration={this.state.duration}
+                    currentTime={this.state.currentTime}
+                />
+                <Controls />
             </div>
         );
     }
