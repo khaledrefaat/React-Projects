@@ -1,85 +1,105 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Img from './Img';
 import Progress from './Progress';
 import Controls from './Controls';
-import { connect } from 'react-redux';
-import { isAudioPlaying, onAudioEnded } from '../actions';
 import './App.css';
 
-class App extends React.Component {
-    state = {
-        isEnded: false,
-        progressPercent: 0,
-        currentTime: '0:00',
-        duration: '0:00',
-    };
+const App = () => {
+    const [isEnded, setIsEnded] = useState(false);
+    const [progressPercent, setProgressPercent] = useState(0);
+    const [currentTime, setCurrentTime] = useState('0:00');
+    const [duration, setDuration] = useState('0:00');
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    componentDidUpdate(pervProps, pervState) {
-        this.props.isPlaying ? this.playVideo() : this.pauseVideo();
+    const audioPlayer = useRef(null);
 
-        if (this.state.isEnded !== pervState.isEnded) {
-            this.props.onAudioEnded(this.state.isEnded);
+    useEffect(() => {
+        isPlaying ? audioPlayer.current.play() : audioPlayer.current.pause();
+    }, [isPlaying, audioPlayer]);
+
+    useEffect(() => {
+        setIsEnded(false);
+        if (isPlaying) {
+            const timerId = setTimeout(() => {
+                audioPlayer.current.play();
+            }, 150);
+            return () => {
+                clearTimeout(timerId);
+            };
         }
+    }, [currentIndex, audioPlayer, isPlaying]);
 
-        // if the current audio changed reset the ended state to false and play the next audio and wait 0.2sec to let the audio loads
-        if (pervProps.currentIndex !== this.props.currentIndex) {
-            this.setState({ isEnded: false });
-            setTimeout(this.playVideo, 150);
-        }
-    }
+    const songs = [
+        {
+            name: 'jacinto-1',
+            displayName: 'Electric Chill Machine',
+            artist: 'Jacinto Design',
+        },
+        {
+            name: 'jacinto-2',
+            displayName: 'Seven Nation Army (Remix)',
+            artist: 'Jacinto Design',
+        },
+        {
+            name: 'jacinto-3',
+            displayName: 'Goodnight, Disco Queen',
+            artist: 'Jacinto Design',
+        },
+        {
+            name: 'metric-1',
+            displayName: 'Front Row (Remix)',
+            artist: 'Metric/Jacinto Design',
+        },
+    ];
 
-    onAudioEnd = () => this.setState({ isEnded: true });
+    const onAudioEnd = () => setIsEnded(true);
 
-    onTimeUpdate = e => {
-        if (this.props.isPlaying) {
+    const onTimeUpdate = e => {
+        if (isPlaying) {
             const { duration, currentTime } = e.nativeEvent.srcElement;
             // setState for music values
-            this.setState({
-                progressPercent: (currentTime / duration) * 100,
-                currentTime,
-                duration,
-            });
+            setProgressPercent((currentTime / duration) * 100);
+            setCurrentTime(currentTime);
+            setDuration(duration);
         }
     };
 
-    playVideo = () => this.player.play();
-
-    pauseVideo = () => this.player.pause();
-
-    render() {
-        const cuurentSong = this.props.songs[this.props.currentIndex];
-        return (
-            <div className="player-container">
-                <Img />
-                <h2 id="title">{cuurentSong.displayName}</h2>
-                <h3 id="artist">{cuurentSong.artist}</h3>
-                <audio
-                    src={`/music/${cuurentSong.name}.mp3`}
-                    ref={ref => (this.player = ref)}
-                    onEnded={this.onAudioEnd}
-                    onTimeUpdate={this.onTimeUpdate}
-                />
-                <Progress
-                    progress={this.state.progressPercent}
-                    duration={this.state.duration}
-                    currentTime={this.state.currentTime}
-                    audioPlayer={this.player}
-                />
-                <Controls />
-            </div>
-        );
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        isPlaying: state.isPlaying.isAudioPlaying,
-        songs: state.songs,
-        currentIndex: state.currentIndex.index,
+    const isAudioPlaying = playing => {
+        setIsPlaying(playing);
     };
+
+    const changeCurrentIndex = index => {
+        setCurrentIndex(index);
+    };
+
+    const cuurentSong = songs[currentIndex];
+
+    return (
+        <div className="player-container">
+            <Img songsList={songs} currentIndex={currentIndex} />
+            <h2 id="title">{cuurentSong.displayName}</h2>
+            <h3 id="artist">{cuurentSong.artist}</h3>
+            <audio
+                src={`/music/${cuurentSong.name}.mp3`}
+                ref={audioPlayer}
+                onEnded={onAudioEnd}
+                onTimeUpdate={onTimeUpdate}
+            />
+            <Progress
+                progress={progressPercent}
+                duration={duration}
+                currentTime={currentTime}
+                audioPlayer={audioPlayer.current}
+            />
+            <Controls
+                songsList={songs}
+                isEnded={isEnded}
+                isAudioPlaying={isPlaying => isAudioPlaying(isPlaying)}
+                index={index => changeCurrentIndex(index)}
+            />
+        </div>
+    );
 };
 
-export default connect(mapStateToProps, {
-    onAudioEnded,
-    isAudioPlaying,
-})(App);
+export default App;
