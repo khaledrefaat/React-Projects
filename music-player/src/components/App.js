@@ -65,9 +65,7 @@ const App = () => {
         }
     };
 
-    const isAudioPlaying = playing => {
-        setIsPlaying(playing);
-    };
+    const isAudioPlaying = playing => setIsPlaying(playing);
 
     const changeCurrentIndex = index => {
         setCurrentIndex(index);

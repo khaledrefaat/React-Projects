@@ -1,9 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Controls.css';
 
-const Controls = ({ isAudioPlaying, songsList, isEnded, index }) => {
+const Controls = ({ isAudioPlaying, songsList, index, isEnded }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [songEnded, setSongEnded] = useState(false);
+
+    const setIndex = useCallback(
+        index => {
+            if (index > 0 && currentIndex >= songsList.length - 1) {
+                setCurrentIndex(0);
+            } else if (index < 0 && currentIndex === 0) {
+                setCurrentIndex(songsList.length - 1);
+            } else {
+                setCurrentIndex(currentIndex + 1);
+            }
+        },
+        [currentIndex, songsList]
+    );
 
     useEffect(() => {
         isAudioPlaying(isPlaying);
@@ -14,20 +28,15 @@ const Controls = ({ isAudioPlaying, songsList, isEnded, index }) => {
     }, [index, currentIndex]);
 
     useEffect(() => {
-        if (isEnded) {
-            setCurrentIndex(currentIndex + 1);
-        }
-    }, [isEnded, currentIndex]);
+        setTimeout(() => setSongEnded(isEnded), 500);
+    }, [isEnded]);
 
-    function setIndex(index) {
-        if (index > 0 && currentIndex >= songsList.length - 1) {
-            setCurrentIndex(0);
-        } else if (index < 0 && currentIndex === 0) {
-            setCurrentIndex(songsList.length - 1);
-        } else {
-            setCurrentIndex(currentIndex + 1);
+    useEffect(() => {
+        if (songEnded) {
+            setIndex(1);
+            setSongEnded(false);
         }
-    }
+    }, [songEnded, setIndex]);
 
     const playClass = `fas fa-${isPlaying ? 'pause' : 'play'} main-button`;
 
