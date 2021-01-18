@@ -1,81 +1,55 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { isAudioPlaying, currentIndex, onAudioEnded } from '../actions';
+import React, { useState, useEffect } from 'react';
 import './Controls.css';
 
-class Controls extends React.Component {
-    state = { isPlaying: false, currentIndex: 0 };
+const Controls = ({ isAudioPlaying, songsList, isEnded, index }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    componentDidMount() {
-        this.props.isAudioPlaying(this.state.isPlaying);
-        this.props.currentIndex(this.state.currentIndex);
-    }
+    useEffect(() => {
+        isAudioPlaying(isPlaying);
+    }, [isPlaying, isAudioPlaying]);
 
-    componentDidUpdate(prevProps, prevState) {
-        // let reduxStore knows playbutton was clicked and audio should play
-        if (this.state.isPlaying !== prevState.isPlaying)
-            this.props.isAudioPlaying(this.state.isPlaying);
+    useEffect(() => {
+        index(currentIndex);
+    }, [index, currentIndex]);
 
-        // change the currentIndex of audio and img
-        if (prevState.currentIndex !== this.state.currentIndex)
-            this.props.currentIndex(this.state.currentIndex);
-
-        // if the current audio ended go to the next one
-        if (this.props.isEnded && this.props.isEnded !== prevProps.isEnded)
-            this.updateCurrentIndex(1);
-    }
-
-    updateCurrentIndex = value => {
-        let oldIndex = this.state.currentIndex;
-        if (
-            value > 0 &&
-            this.state.currentIndex >= this.props.songs.length - 1
-        ) {
-            this.setState({ currentIndex: 0 });
-        } else if (value < 0 && this.state.currentIndex === 0) {
-            this.setState({ currentIndex: this.props.songs.length - 1 });
-        } else {
-            this.setState({ currentIndex: (oldIndex += value) });
+    useEffect(() => {
+        if (isEnded) {
+            setCurrentIndex(currentIndex + 1);
         }
-    };
+    }, [isEnded, currentIndex]);
 
-    onPlayButton = () => {
-        this.setState({ isPlaying: !this.state.isPlaying });
-    };
-
-    render() {
-        const playClass = `fas fa-${
-            this.state.isPlaying ? 'pause' : 'play'
-        } main-button`;
-
-        return (
-            <div className="player-controls">
-                <i
-                    className="fas fa-backward"
-                    title="previous"
-                    onClick={() => this.updateCurrentIndex(-1)}
-                />
-                <i
-                    className={playClass}
-                    title="play"
-                    onClick={() => this.onPlayButton()}
-                />
-                <i
-                    className="fas fa-forward"
-                    title="next"
-                    onClick={() => this.updateCurrentIndex(1)}
-                />
-            </div>
-        );
+    function setIndex(index) {
+        if (index > 0 && currentIndex >= songsList.length - 1) {
+            setCurrentIndex(0);
+        } else if (index < 0 && currentIndex === 0) {
+            setCurrentIndex(songsList.length - 1);
+        } else {
+            setCurrentIndex(currentIndex + 1);
+        }
     }
-}
 
-const mapStateToProps = state => {
-    return { songs: state.songs, isEnded: state.isAudioEnded.isEnded };
+    const playClass = `fas fa-${isPlaying ? 'pause' : 'play'} main-button`;
+
+    return (
+        <div className="player-controls">
+            <i
+                className="fas fa-backward"
+                title="previous"
+                onClick={() => setIndex(-1)}
+            />
+            <i
+                className={playClass}
+                title="play"
+                onClick={() => setIsPlaying(!isPlaying)}
+            />
+            <i
+                className="fas fa-forward"
+                title="next"
+                onClick={() => setIndex(1)}
+            />
+        </div>
+    );
 };
 
-export default connect(mapStateToProps, {
-    isAudioPlaying,
-    currentIndex,
-    onAudioEnded,
-})(Controls);
+export default Controls;

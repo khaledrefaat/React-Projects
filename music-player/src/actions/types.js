@@ -1,5 +1,0 @@
-export const IS_AUDIO_PLAYING = 'IS_AUDIO_PLAYING';
-
-export const ON_AUDIO_ENDED = 'ON_AUDIO_ENDED';
-
-export const CURRENT_INDEX = 'CURRENT_INDEX';
