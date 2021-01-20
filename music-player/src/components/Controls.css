@@ -1,9 +1,13 @@
 .player-controls {
     position: relative;
     top: -15px;
-    left: 120px;
-    width: 200px;
+    left: 80px;
+    width: 300px;
 }
+
+/* .fas:first-of-type {
+    margin-left: auto;
+} */
 
 .fas {
     font-size: 30px;

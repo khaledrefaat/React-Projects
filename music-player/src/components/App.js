@@ -73,6 +73,8 @@ const App = () => {
 
     const cuurentSong = songs[currentIndex];
 
+    console.log(audioPlayer.current.volume);
+
     return (
         <div className="player-container">
             <Img songsList={songs} currentIndex={currentIndex} />
