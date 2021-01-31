@@ -42,7 +42,7 @@ const Controls = ({ isAudioPlaying, songsList, index, isEnded }) => {
 
     return (
         <div className="player-controls">
-            <i class="fas fa-volume-up" />
+            {/* <i class="fas fa-volume-up" /> */}
             <i
                 className="fas fa-backward"
                 title="previous"

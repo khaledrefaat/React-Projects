@@ -73,8 +73,6 @@ const App = () => {
 
     const cuurentSong = songs[currentIndex];
 
-    console.log(audioPlayer.current.volume);
-
     return (
         <div className="player-container">
             <Img songsList={songs} currentIndex={currentIndex} />
@@ -103,3 +101,6 @@ const App = () => {
 };
 
 export default App;
+
+// ClientId - dbb219b78d944e34aaaa6c7df1062326
+// ClientSecret - b6da9b978f694486b1965c4e8e00d9be
