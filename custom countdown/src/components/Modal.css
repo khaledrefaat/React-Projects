@@ -11,9 +11,10 @@
   text-transform: capitalize;
 }
 
-.modal-title {
+.heading-2 {
   font-size: 3rem;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .input-label {
@@ -42,25 +43,23 @@
   flex-direction: column;
 }
 
-.countdown-container > div {
+.count-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
-.countdown__numbers {
-  justify-content: space-around;
+.count-container > div {
+  flex-direction: column;
+  text-align: center;
 }
 
-.countdown__numbers h2 {
-  font-size: 6rem;
-}
-
-.countdown__words {
-  justify-content: space-evenly;
-}
-
-.countdown__words h3 {
-  font-size: 3rem;
+.count-container h3 {
+  font-size: 3.5rem;
   font-weight: 400;
+}
+
+.count-container h2 {
+  font-size: 6rem;
 }

@@ -5,6 +5,8 @@ import './Modal.css';
 const Modal = () => {
   const [term, setTerm] = useState('');
   const [showCountdown, setShowCountdown] = useState(false);
+  const [daysLeft, setDaysLeft] = useState(0);
+  const [hoursLeft, setHoursLeft] = useState(0);
 
   const today = new Date();
   const dd = today.getDate();
@@ -13,10 +15,8 @@ const Modal = () => {
 
   function onTimePicked(date) {
     const timePicked = date.split('-');
-    const daysLeft = timePicked[2] - dd;
-    const hoursLeft = 24 - today.getHours();
-    console.log('days left: ' + daysLeft);
-    console.log('hours left: ' + hoursLeft);
+    setDaysLeft(timePicked[2] - dd);
+    setHoursLeft(24 - today.getHours());
   }
 
   function minDate() {
@@ -35,7 +35,7 @@ const Modal = () => {
   function renderForm() {
     return (
       <div className="modal-container">
-        <h2 className="modal-title">create a custom countdown</h2>
+        <h2 className="heading-2">create a custom countdown</h2>
         <Form>
           <Form.Group>
             <Form.Label className="input-label">title:</Form.Label>
@@ -73,18 +73,24 @@ const Modal = () => {
   function renderCountdown() {
     return (
       <div className="countdown-container">
-        <h2>valve index</h2>
-        <div className="countdown__numbers">
-          <h2>1</h2>
-          <h2>8</h2>
-          <h2>0</h2>
-          <h2>50</h2>
-        </div>
-        <div className="countdown__words">
-          <h3>days</h3>
-          <h3>hours</h3>
-          <h3>minutes</h3>
-          <h3>seconds</h3>
+        <h2 className="heading-2">valve index</h2>
+        <div className="count-container">
+          <div className="days">
+            <h2>{daysLeft}</h2>
+            <h3>days</h3>
+          </div>
+          <div className="hours">
+            <h2>{hoursLeft}</h2>
+            <h3>hours</h3>
+          </div>
+          <div className="minutes">
+            <h2>0</h2>
+            <h3>minutes</h3>
+          </div>
+          <div className="seconds">
+            <h2>50</h2>
+            <h3>seconds</h3>
+          </div>
         </div>
         <Button
           className="btn-modal"
