@@ -1,4 +1,5 @@
-.modal-container {
+.modal-container,
+.countdown-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -30,4 +31,36 @@
   font-size: 1.6rem !important;
   margin-top: 2rem;
   text-transform: inherit;
+}
+
+/* countdown styles */
+
+.countdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.countdown-container > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.countdown__numbers {
+  justify-content: space-around;
+}
+
+.countdown__numbers h2 {
+  font-size: 6rem;
+}
+
+.countdown__words {
+  justify-content: space-evenly;
+}
+
+.countdown__words h3 {
+  font-size: 3rem;
+  font-weight: 400;
 }
