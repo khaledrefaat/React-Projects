@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './Modal.css';
 
@@ -9,6 +9,7 @@ const Modal = () => {
   const [daysLeft, setDaysLeft] = useState(0);
   const [hoursLeft, setHoursLeft] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
 
   const today = new Date();
   const dd = today.getDate();
@@ -20,14 +21,31 @@ const Modal = () => {
       setShowCountdown(!showCountdown);
       setDaysLeft(dateTerm.split('-')[2] - dd);
       setHoursLeft(24 - today.getHours());
-      setDateTerm('');
+      setMinutes(today.getMinutes());
+      setSeconds(today.getSeconds());
       setTerm('');
     }
   }
 
-  useRef(() => {
-    setInterval(() => setSeconds(today.getSeconds(), [1000]));
-  }, [seconds, today]);
+  useEffect(() => {
+    if (showCountdown) {
+      function count() {
+        const today = new Date();
+        let remainingDays = dateTerm.split('-')[2] - today.getDate();
+        let remainingHours = 24 - today.getHours();
+        let remainingMinutes = new Date().getMinutes();
+        let remainingSecond = new Date().getSeconds();
+        setDaysLeft(remainingDays);
+        setHoursLeft(remainingHours);
+        setMinutes(remainingMinutes);
+        setSeconds(remainingSecond);
+      }
+      const countDown = setInterval(() => count(), 1000);
+      return () => {
+        clearInterval(countDown);
+      };
+    }
+  }, [showCountdown, dateTerm]);
 
   function minDate() {
     if (mm < 10 && dd < 10) return `${yyy}-0${mm}-0${dd}`;
@@ -78,27 +96,41 @@ const Modal = () => {
   }
 
   function renderCountdown() {
+    if (daysLeft > 0 || hoursLeft > 0) {
+      return (
+        <div className="countdown-container">
+          <h2 className="heading-2">{term}</h2>
+          <div className="count-container">
+            <div className="days">
+              <h2>{daysLeft}</h2>
+              <h3>days</h3>
+            </div>
+            <div className="hours">
+              <h2>{hoursLeft}</h2>
+              <h3>hours</h3>
+            </div>
+            <div className="minutes">
+              <h2>{minutes}</h2>
+              <h3>minutes</h3>
+            </div>
+            <div className="seconds">
+              <h2>{seconds}</h2>
+              <h3>seconds</h3>
+            </div>
+          </div>
+          <Button
+            className="btn-modal"
+            size="lg"
+            onClick={() => setShowCountdown(!showCountdown)}
+            block>
+            reset
+          </Button>
+        </div>
+      );
+    }
     return (
       <div className="countdown-container">
-        <h2 className="heading-2">{term}</h2>
-        <div className="count-container">
-          <div className="days">
-            <h2>{daysLeft}</h2>
-            <h3>days</h3>
-          </div>
-          <div className="hours">
-            <h2>{hoursLeft}</h2>
-            <h3>hours</h3>
-          </div>
-          <div className="minutes">
-            <h2>{today.getMinutes()}</h2>
-            <h3>minutes</h3>
-          </div>
-          <div className="seconds">
-            <h2>{seconds}</h2>
-            <h3>seconds</h3>
-          </div>
-        </div>
+        <h2 className="heading-2">Timeup</h2>
         <Button
           className="btn-modal"
           size="lg"
