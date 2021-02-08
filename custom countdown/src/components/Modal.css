@@ -4,17 +4,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60rem;
+  width: max-content;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 4rem;
+  padding: 2rem;
   border-radius: 1rem;
   text-transform: capitalize;
 }
 
 .heading-2 {
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .input-label {
@@ -22,14 +22,13 @@
   font-weight: 700;
 }
 
-/* to overwrite bootstrap styles */
 .form-input {
-  border-radius: 2.5rem !important;
+  border-radius: 2.5rem;
 }
 
 .btn-modal {
-  border-radius: 2.5rem !important;
-  font-size: 1.6rem !important;
+  border-radius: 2.5rem;
+  font-size: 1.6rem;
   margin-top: 2rem;
   text-transform: inherit;
 }
@@ -62,4 +61,27 @@
 
 .count-container h2 {
   font-size: 6rem;
+}
+
+/* media queries */
+
+/* 400px */
+@media only screen and (min-width: 25em) {
+  .heading-2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* 650px */
+@media only screen and (min-width: 40.625em) {
+  .modal-container,
+  .countdown-container {
+    width: 60rem;
+    padding: 4rem;
+  }
+
+  .heading-2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
 }

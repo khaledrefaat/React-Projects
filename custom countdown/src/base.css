@@ -3,20 +3,22 @@
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 html {
-    font-size: 62.5%; /* 10px = 1rem */
-    box-sizing: border-box;
+  font-size: 62.5%; /* 10px = 1rem */
+  box-sizing: border-box;
 }
 
 body {
-    line-height: 1.6;
-    min-height: 100vh;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    position: relative;
+  line-height: 1.6;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  position: relative;
+  max-width: 100vw;
+  overflow: hidden;
 }
