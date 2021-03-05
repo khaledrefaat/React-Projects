@@ -10,6 +10,7 @@ const Modal = () => {
   const [hoursLeft, setHoursLeft] = useState(0);
   const [minutesLeft, setMinutes] = useState(0);
   const [secondsLeft, setSeconds] = useState(0);
+  const [savedCountDown, setSavedCountDown] = useState({});
 
   function onFormSubmit() {
     if (dateTerm && term) {
@@ -17,6 +18,15 @@ const Modal = () => {
       setTimeLeft(0, 0, 0, 0);
     }
   }
+
+  useEffect(() => {
+    const countDown = JSON.parse(localStorage.getItem('countDown'));
+    if (countDown) {
+      setDateTerm(countDown.date);
+      setTerm(countDown.title);
+      setShowCountdown(true);
+    }
+  }, [term, dateTerm]);
 
   useEffect(() => {
     if (showCountdown) {
@@ -37,13 +47,18 @@ const Modal = () => {
         );
 
         setTimeLeft(days, hours, minutes, seconds);
+        setSavedCountDown({
+          title: term,
+          date: dateTerm,
+        });
+        localStorage.setItem('countDown', JSON.stringify(savedCountDown));
       }
       const countDown = setInterval(() => count(), 1000);
       return () => {
         clearInterval(countDown);
       };
     }
-  }, [showCountdown, dateTerm]);
+  }, [showCountdown, dateTerm, savedCountDown, term]);
 
   function minDate() {
     const today = new Date();
@@ -61,6 +76,11 @@ const Modal = () => {
     setHoursLeft(hour);
     setMinutes(minute);
     setSeconds(second);
+  }
+
+  function onResetClick() {
+    setShowCountdown(!showCountdown);
+    localStorage.removeItem('countDown');
   }
 
   function renderForm() {
@@ -123,11 +143,7 @@ const Modal = () => {
               <h3>seconds</h3>
             </div>
           </div>
-          <Button
-            className="btn-modal"
-            size="lg"
-            onClick={() => setShowCountdown(!showCountdown)}
-            block>
+          <Button className="btn-modal" size="lg" onClick={onResetClick} block>
             reset
           </Button>
         </div>
@@ -136,11 +152,7 @@ const Modal = () => {
     return (
       <div className="countdown-container">
         <h2 className="heading-2">Timeup</h2>
-        <Button
-          className="btn-modal"
-          size="lg"
-          onClick={() => setShowCountdown(!showCountdown)}
-          block>
+        <Button className="btn-modal" size="lg" onClick={onResetClick} block>
           reset
         </Button>
       </div>
