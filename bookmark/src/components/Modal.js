@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDom from 'react-dom';
 import { Modal as ModalCard, Button, Form } from 'react-bootstrap';
 import './Modal.scss';
 
 function Modal({ title, modalBody }) {
+  const [hideModal, setHideModal] = useState(true);
+
   function renderModalBody() {
     if (modalBody) {
       return <p>{modalBody}</p>;
@@ -11,19 +13,19 @@ function Modal({ title, modalBody }) {
     return (
       <Form>
         <Form.Group>
-          <Form.Label>email address</Form.Label>
-          <Form.Control type="email" placeholder="enter email" />
+          <Form.Label>website name</Form.Label>
+          <Form.Control type="text" placeholder="website name" />
         </Form.Group>
         <Form.Group>
-          <Form.Label>password</Form.Label>
-          <Form.Control type="password" placeholder="password" />
+          <Form.Label>website url</Form.Label>
+          <Form.Control type="text" placeholder="url" />
         </Form.Group>
       </Form>
     );
   }
 
   return ReactDom.createPortal(
-    <div className="modal-container">
+    <div className={`modal-container ${hideModal ? 'hide-modal' : ''}`}>
       <ModalCard.Dialog className="modal-box">
         <ModalCard.Header closeButton>
           <ModalCard.Title>{title}</ModalCard.Title>
@@ -32,7 +34,9 @@ function Modal({ title, modalBody }) {
         <ModalCard.Body>{renderModalBody()}</ModalCard.Body>
 
         <ModalCard.Footer>
-          <Button variant="secondary">cancel</Button>
+          <Button onClick={() => setHideModal(true)} variant="secondary">
+            cancel
+          </Button>
           <Button variant="primary">save</Button>
         </ModalCard.Footer>
       </ModalCard.Dialog>

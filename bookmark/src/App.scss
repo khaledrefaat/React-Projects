@@ -5,3 +5,17 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-btn {
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+  align-self: center;
+}
