@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { Modal as ModalCard, Button, Form } from 'react-bootstrap';
 import './Modal.scss';
 
-function Modal({ title, modalBody }) {
-  const [hideModal, setHideModal] = useState(true);
+class Modal extends Component {
+  state = { showModal: true };
 
-  function renderModalBody() {
-    if (modalBody) {
-      return <p>{modalBody}</p>;
+  renderModalBody() {
+    if (this.props.modalBody) {
+      return <p>{this.props.modalBody}</p>;
     }
     return (
       <Form>
@@ -24,25 +24,34 @@ function Modal({ title, modalBody }) {
     );
   }
 
-  return ReactDom.createPortal(
-    <div className={`modal-container ${hideModal ? 'hide-modal' : ''}`}>
-      <ModalCard.Dialog className="modal-box">
-        <ModalCard.Header closeButton>
-          <ModalCard.Title>{title}</ModalCard.Title>
-        </ModalCard.Header>
+  render() {
+    return ReactDom.createPortal(
+      <div
+        className={`modal-container ${
+          this.state.showModal ? '' : 'hide-modal'
+        }`}>
+        <ModalCard.Dialog className="modal-box">
+          <ModalCard.Header
+            onHide={() => this.setState({ showModal: false })}
+            closeButton>
+            <ModalCard.Title>{this.props.title}</ModalCard.Title>
+          </ModalCard.Header>
 
-        <ModalCard.Body>{renderModalBody()}</ModalCard.Body>
+          <ModalCard.Body>{this.renderModalBody()}</ModalCard.Body>
 
-        <ModalCard.Footer>
-          <Button onClick={() => setHideModal(true)} variant="secondary">
-            cancel
-          </Button>
-          <Button variant="primary">save</Button>
-        </ModalCard.Footer>
-      </ModalCard.Dialog>
-    </div>,
-    document.getElementById('modal')
-  );
+          <ModalCard.Footer>
+            <Button
+              onClick={() => this.setState({ showModal: false })}
+              variant="secondary">
+              cancel
+            </Button>
+            <Button variant="primary">save</Button>
+          </ModalCard.Footer>
+        </ModalCard.Dialog>
+      </div>,
+      document.getElementById('modal')
+    );
+  }
 }
 
 export default Modal;
