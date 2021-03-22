@@ -1,55 +1,17 @@
-.modal-container {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.5);
-  transition: all 0.2s ease-out;
-
-  & > div {
-    box-shadow: 0 0.5rem 1.5rem 1rem rgba(0, 0, 0, 0.15);
-    border: none;
-  }
-}
-
-.hide-modal {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  z-index: -1;
-}
-
 .modal-box {
-  width: 80%;
-  font-size: 1.6rem;
-  border: none;
-
-  button {
-    font-size: 1.6rem;
-    text-transform: capitalize;
-  }
-
-  // 400px
-  @media only screen and (min-width: 25em) {
-    font-size: 1.9rem;
-
-    button {
-      font-size: 1.8rem;
-    }
-  }
+  font-size: 1.9rem;
 
   input {
     height: 3rem;
     font-size: 1.6rem;
   }
+
   label,
   ::placeholder {
     text-transform: capitalize;
+  }
+
+  button {
+    font-size: 1.6rem;
   }
 }

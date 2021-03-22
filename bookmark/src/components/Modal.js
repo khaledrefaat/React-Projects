@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import ReactDom from 'react-dom';
 import { Modal as ModalCard, Button, Form } from 'react-bootstrap';
 import './Modal.scss';
 
 class Modal extends Component {
-  state = { showModal: true };
+  state = { showModal: true, websiteTerm: '', urlTerm: '' };
 
   renderModalBody() {
     if (this.props.modalBody) {
@@ -14,42 +13,55 @@ class Modal extends Component {
       <Form>
         <Form.Group>
           <Form.Label>website name</Form.Label>
-          <Form.Control type="text" placeholder="website name" />
+          <Form.Control
+            onChange={e => this.setState({ websiteTerm: e.target.value })}
+            value={this.state.websiteTerm}
+            type="text"
+            placeholder="website name"
+          />
         </Form.Group>
         <Form.Group>
           <Form.Label>website url</Form.Label>
-          <Form.Control type="text" placeholder="url" />
+          <Form.Control
+            onChange={e => this.setState({ urlTerm: e.target.value })}
+            value={this.state.urlTerm}
+            type="text"
+            placeholder="url"
+          />
         </Form.Group>
       </Form>
     );
   }
 
+  onSaveClick = e => {
+    if (this.state.websiteTerm && this.state.urlTerm) {
+      this.setState({ showModal: false });
+    }
+  };
+
   render() {
-    return ReactDom.createPortal(
-      <div
-        className={`modal-container ${
-          this.state.showModal ? '' : 'hide-modal'
-        }`}>
-        <ModalCard.Dialog className="modal-box">
-          <ModalCard.Header
-            onHide={() => this.setState({ showModal: false })}
-            closeButton>
-            <ModalCard.Title>{this.props.title}</ModalCard.Title>
-          </ModalCard.Header>
-
-          <ModalCard.Body>{this.renderModalBody()}</ModalCard.Body>
-
-          <ModalCard.Footer>
-            <Button
-              onClick={() => this.setState({ showModal: false })}
-              variant="secondary">
-              cancel
-            </Button>
-            <Button variant="primary">save</Button>
-          </ModalCard.Footer>
-        </ModalCard.Dialog>
-      </div>,
-      document.getElementById('modal')
+    return (
+      <ModalCard
+        className="modal-box"
+        show={this.state.showModal}
+        onHide={() => this.setState({ showModal: false })}
+        animation
+        centered>
+        <ModalCard.Header closeButton>
+          <ModalCard.Title>{this.props.title}</ModalCard.Title>
+        </ModalCard.Header>
+        <ModalCard.Body>{this.renderModalBody()}</ModalCard.Body>
+        <ModalCard.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => this.setState({ showModal: false })}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => this.onSaveClick()}>
+            Save Changes
+          </Button>
+        </ModalCard.Footer>
+      </ModalCard>
     );
   }
 }
