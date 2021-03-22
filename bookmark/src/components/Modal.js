@@ -3,7 +3,13 @@ import { Modal as ModalCard, Button, Form } from 'react-bootstrap';
 import './Modal.scss';
 
 class Modal extends Component {
-  state = { showModal: true, websiteTerm: '', urlTerm: '' };
+  state = { showModal: false, websiteTerm: '', urlTerm: '' };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.openModal !== this.props.openModal) {
+      this.setState({ showModal: !this.state.showModal });
+    }
+  }
 
   renderModalBody() {
     if (this.props.modalBody) {

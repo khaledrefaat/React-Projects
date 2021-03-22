@@ -18,7 +18,12 @@ class App extends Component {
             variant="secondary">
             add bookmark
           </Button>
-          <Modal openModal={this.state.openModal} title="Add Bookmark" />
+          <Modal
+            openModal={() =>
+              this.setState({ openModal: !this.state.openModal })
+            }
+            title="Add Bookmark"
+          />
         </Container>
       </div>
     );
