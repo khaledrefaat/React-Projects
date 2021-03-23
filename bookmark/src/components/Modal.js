@@ -7,7 +7,7 @@ class Modal extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.openModal !== this.props.openModal) {
-      this.setState({ showModal: !this.state.showModal });
+      this.setState({ showModal: this.props.openModal });
     }
   }
 
@@ -39,28 +39,31 @@ class Modal extends Component {
     );
   }
 
-  onSaveClick = e => {
+  onSaveClick = () => {
     if (this.state.websiteTerm && this.state.urlTerm) {
-      this.setState({ showModal: false });
+      this.props.onModalSave(this.state.websiteTerm, this.state.urlTerm);
+      this.setState({ websiteTerm: '', urlTerm: '' });
+      this.hideModal();
     }
   };
+
+  hideModal = () => this.props.closeModal(false);
 
   render() {
     return (
       <ModalCard
         className="modal-box"
         show={this.state.showModal}
-        onHide={() => this.setState({ showModal: false })}
+        onHide={this.hideModal}
         animation
-        centered>
+        centered
+        onExited={this.hideModal}>
         <ModalCard.Header closeButton>
           <ModalCard.Title>{this.props.title}</ModalCard.Title>
         </ModalCard.Header>
         <ModalCard.Body>{this.renderModalBody()}</ModalCard.Body>
         <ModalCard.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => this.setState({ showModal: false })}>
+          <Button variant="secondary" onClick={this.hideModal}>
             Close
           </Button>
           <Button variant="primary" onClick={() => this.onSaveClick()}>
@@ -73,3 +76,5 @@ class Modal extends Component {
 }
 
 export default Modal;
+
+// when i press Esc the state dosent change

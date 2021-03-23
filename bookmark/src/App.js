@@ -6,9 +6,14 @@ import { Button } from 'react-bootstrap';
 import './App.scss';
 
 class App extends Component {
-  state = { openModal: false };
+  state = { openModal: false, bookmarks: [] };
+
+  onModalSave = (webName, webUrl) => {
+    this.setState({ bookmarks: [...this.state.bookmarks, [webName, webUrl]] });
+  };
 
   render() {
+    console.log(this.state.bookmarks);
     return (
       <div className="app-background">
         <Container className="app-container">
@@ -19,10 +24,10 @@ class App extends Component {
             add bookmark
           </Button>
           <Modal
-            openModal={() =>
-              this.setState({ openModal: !this.state.openModal })
-            }
+            openModal={this.state.openModal}
             title="Add Bookmark"
+            onModalSave={this.onModalSave}
+            closeModal={isOpen => this.setState({ openModal: isOpen })}
           />
         </Container>
       </div>
