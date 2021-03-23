@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
 import Modal from './components/Modal';
+import BookmarkList from './components/BookmarkList';
+
+import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 
 import './App.scss';
 
 class App extends Component {
-  state = { openModal: false };
+  state = {
+    openModal: false,
+    bookmarks: [],
+  };
+
+  onModalSave = (webName, webUrl) => {
+    this.setState({ bookmarks: [...this.state.bookmarks, [webName, webUrl]] });
+  };
 
   render() {
+    console.log(this.state.bookmarks);
     return (
       <div className="app-background">
         <Container className="app-container">
@@ -18,11 +28,12 @@ class App extends Component {
             variant="secondary">
             add bookmark
           </Button>
+          <BookmarkList bookmarks={this.state.bookmarks} />
           <Modal
-            openModal={() =>
-              this.setState({ openModal: !this.state.openModal })
-            }
+            openModal={this.state.openModal}
             title="Add Bookmark"
+            onModalSave={this.onModalSave}
+            closeModal={isOpen => this.setState({ openModal: isOpen })}
           />
         </Container>
       </div>
@@ -31,3 +42,5 @@ class App extends Component {
 }
 
 export default App;
+
+// try to add www.facebook.com or facebook.com without https:// to see the problem
