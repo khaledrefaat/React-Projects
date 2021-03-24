@@ -13,6 +13,15 @@ class App extends Component {
     bookmarks: [],
   };
 
+  componentDidMount() {
+    let storedState = JSON.parse(localStorage.getItem('bookmarks'));
+    this.setState({ bookmarks: storedState });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('bookmarks', JSON.stringify(this.state.bookmarks));
+  }
+
   onModalSave = (webName, webUrl) => {
     this.setState({ bookmarks: [...this.state.bookmarks, [webName, webUrl]] });
   };
