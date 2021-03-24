@@ -5,7 +5,14 @@ import './BookmarkList.scss';
 export class BookmarkList extends Component {
   renderBookmark = () => {
     return this.props.bookmarks.map((cur, index) => {
-      return <Bookmark key={index} name={cur[0]} url={cur[1]} />;
+      return (
+        <Bookmark
+          onDelete={() => this.props.onDeletClicked(index)}
+          key={index}
+          name={cur[0]}
+          url={cur[1]}
+        />
+      );
     });
   };
 

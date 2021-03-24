@@ -1,11 +1,16 @@
 import React from 'react';
 import './Bookmark.scss';
 
-function Bookmark({ name, url }) {
+function Bookmark({ name, url, onDelete }) {
+  function onDeleteClicked(e) {
+    e.preventDefault();
+    onDelete();
+  }
+
   return (
-    <a className="bookmark" href={url} target="blank">
+    <a rel="external" className="bookmark" href={url} target="blank">
       {name}
-      <span>x</span>
+      <span onClick={onDeleteClicked}>x</span>
     </a>
   );
 }
