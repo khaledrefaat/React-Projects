@@ -1,88 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import './Modal.css';
+import React from "react";
+import { Form, Button } from "react-bootstrap";
+import "./Modal.css";
 
-const Modal = () => {
-  const [term, setTerm] = useState('');
-  const [dateTerm, setDateTerm] = useState('');
-  const [showCountdown, setShowCountdown] = useState(false);
-  const [daysLeft, setDaysLeft] = useState(0);
-  const [hoursLeft, setHoursLeft] = useState(0);
-  const [minutesLeft, setMinutes] = useState(0);
-  const [secondsLeft, setSeconds] = useState(0);
-  const [savedCountDown, setSavedCountDown] = useState({});
-
-  function onFormSubmit() {
-    if (dateTerm && term) {
-      setShowCountdown(!showCountdown);
-      setTimeLeft(0, 0, 0, 0);
-    }
-  }
-
-  useEffect(() => {
-    const countDown = JSON.parse(localStorage.getItem('countDown'));
-    if (countDown) {
-      setDateTerm(countDown.date);
-      setTerm(countDown.title);
-      setShowCountdown(true);
-    }
-  }, [term, dateTerm]);
-
-  useEffect(() => {
-    if (showCountdown) {
-      function count() {
-        const now = new Date().getTime();
-        const second = 1000;
-        const minute = second * 60;
-        const hour = minute * 60;
-        const day = hour * 24;
-
-        const countDown = new Date(dateTerm).getTime();
-        const distance = countDown - now;
-        const days = Math.floor(distance / day);
-        const hours = Math.floor((distance % day) / hour);
-        const minutes = Math.floor(((distance % day) % hour) / minute);
-        const seconds = Math.floor(
-          (((distance % day) % hour) % minute) / second
-        );
-
-        setTimeLeft(days, hours, minutes, seconds);
-        setSavedCountDown({
-          title: term,
-          date: dateTerm,
-        });
-        localStorage.setItem('countDown', JSON.stringify(savedCountDown));
-      }
-      const countDown = setInterval(() => count(), 1000);
-      return () => {
-        clearInterval(countDown);
-      };
-    }
-  }, [showCountdown, dateTerm, savedCountDown, term]);
-
-  function minDate() {
-    const today = new Date();
-    const dd = today.getDate();
-    const mm = today.getMonth() + 1;
-    const yyy = today.getFullYear();
-    if (mm < 10 && dd < 10) return `${yyy}-0${mm}-0${dd}`;
-    else if (dd < 10) return `${yyy}-${mm}-0${dd}`;
-    else if (mm < 10) return `${yyy}-0${mm}-${dd}`;
-    return `${yyy}-${mm}-${dd}`;
-  }
-
-  function setTimeLeft(day, hour, minute, second) {
-    setDaysLeft(day);
-    setHoursLeft(hour);
-    setMinutes(minute);
-    setSeconds(second);
-  }
-
-  function onResetClick() {
-    setShowCountdown(!showCountdown);
-    localStorage.removeItem('countDown');
-  }
-
+const Modal = ({
+  term,
+  daysLeft,
+  minutesLeft,
+  secondsLeft,
+  distance,
+  onFormSubmit,
+}) => {
   function renderForm() {
     return (
       <div className="modal-container">
@@ -94,7 +21,7 @@ const Modal = () => {
               className="form-input"
               type="text"
               size="lg"
-              onChange={e => setTerm(e.target.value)}
+              onChange={(e) => setTerm(e.target.value)}
               value={term}
             />
           </Form.Group>
@@ -105,7 +32,7 @@ const Modal = () => {
               type="date"
               size="lg"
               min={minDate()}
-              onChange={e => setDateTerm(e.target.value)}
+              onChange={(e) => setDateTerm(e.target.value)}
               value={dateTerm}
             />
           </Form.Group>
