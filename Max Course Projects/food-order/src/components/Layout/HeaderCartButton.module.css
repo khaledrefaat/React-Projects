@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  justify-content: space-around;
+  background-color: #5c1e14;
+  width: 10rem;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 20rem;
+}
+
+@media only screen and (min-width: 25em) {
+  .button {
+    width: 12rem;
+    padding: 0.5rem 2rem;
+  }
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
