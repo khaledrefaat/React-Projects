@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import styled from 'styled-components';
-import AccessAlarmsOutlinedIcon from '@material-ui/icons/AccessAlarmsOutlined';
+// import AccessAlarmsOutlinedIcon from '@material-ui/icons/AccessAlarmsOutlined';
 
 const Create = () => {
   const CustomButton = styled(Button)`
@@ -16,7 +16,7 @@ const Create = () => {
   return (
     <div className="create">
       <CustomButton type="submit">Hello World</CustomButton>
-      <AccessAlarmsOutlinedIcon />
+      {/* <AccessAlarmsOutlinedIcon /> */}
     </div>
   );
 };
