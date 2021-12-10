@@ -50,6 +50,7 @@ const NavLinks = () => {
   const ListItem = styled.li`
     cursor: pointer;
     margin: 1rem 0;
+    text-align: center;
 
     @media only screen and (min-width: ${bp768}em) {
       margin: 0;
@@ -99,7 +100,7 @@ const NavLinks = () => {
           </MuiLink>
         </ListItem>
         <ListItem>
-          <MuiLink component={RouterLink} to="/">
+          <MuiLink component={RouterLink} to="/auth">
             Login
           </MuiLink>
         </ListItem>

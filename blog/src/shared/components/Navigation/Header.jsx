@@ -14,7 +14,6 @@ import styled from '@emotion/styled';
 function HideOnScroll(props) {
   const { children } = props;
   const trigger = useScrollTrigger();
-  console.log(children);
   return (
     <Slide appear={false} direction="down" in={!trigger}>
       {children}
@@ -63,7 +62,7 @@ const MainBar = styled(AppBar)`
 
 const Header = props => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, Height: '8vh' }}>
       <CssBaseline />
       <HideOnScroll {...props}>
         <MainBar>{props.children}</MainBar>

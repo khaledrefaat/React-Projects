@@ -1,19 +1,24 @@
-import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from '@emotion/styled';
+
+import Auth from './users/containers/Auth';
 import Nav from './shared/components/Navigation/Nav';
 
-const MainApp = styled.main({
-  height: 8000,
-});
+const AppContainer = styled.main`
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+`;
 
 function App() {
   return (
     <Router>
-      <MainApp className="App">
-        <Nav></Nav>
-      </MainApp>
+      <AppContainer className="App">
+        <Nav />
+        <Routes>
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
+      </AppContainer>
     </Router>
   );
 }
