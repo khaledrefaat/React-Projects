@@ -66,6 +66,7 @@ export const FormContainer = styled.div`
   @media only screen and (min-width: 48em) {
     width: 50%;
     height: 100%;
+    padding: 0 30px;
   }
 
   form {

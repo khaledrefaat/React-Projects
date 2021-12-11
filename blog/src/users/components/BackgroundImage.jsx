@@ -5,8 +5,7 @@ const pattern = `url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox
 const BackgroundImageComponent = styled.div({
   backgroundColor: '#fbf8ff',
   backgroundImage: pattern,
-  height: '92vh',
-  width: '100%',
+  flexGrow: '1',
   display: 'flexbox',
   alignItems: 'center',
   justifyContent: 'center',

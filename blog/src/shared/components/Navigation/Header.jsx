@@ -62,7 +62,7 @@ const MainBar = styled(AppBar)`
 
 const Header = props => {
   return (
-    <Box sx={{ flexGrow: 1, Height: '8vh' }}>
+    <Box sx={{ width: '100%', height: '10vh' }}>
       <CssBaseline />
       <HideOnScroll {...props}>
         <MainBar>{props.children}</MainBar>
