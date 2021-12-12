@@ -1,0 +1,11 @@
+.list {
+  list-style: none;
+}
+
+.item {
+}
+
+.item span {
+  color: #6c5ce7;
+  font-weight: 700;
+}

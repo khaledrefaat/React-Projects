@@ -1,0 +1,23 @@
+.btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background-color: #6c5ce7;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 4px;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+  align-self: flex-end;
+}
+
+.btn:hover {
+  background-color: #7c6deb;
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
