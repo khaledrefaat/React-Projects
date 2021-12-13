@@ -20,21 +20,23 @@ function App() {
   const hideModal = () => setIsError(false);
 
   return (
-    <main className="app">
+    <>
       {isErorr && (
         <ErrorModal error={errorText} hideModal={hideModal}>
           this is shit shity shit
         </ErrorModal>
       )}
-      <Card>
-        <AddUser showError={showModal} AddUserHandler={addUser} />
-      </Card>
-      {usersList.map((user, index) => (
+      <main className="app">
         <Card>
-          <UsersItem key={index} user={user} />
+          <AddUser showError={showModal} AddUserHandler={addUser} />
         </Card>
-      ))}
-    </main>
+        {usersList.map((user, index) => (
+          <Card>
+            <UsersItem key={index} user={user} />
+          </Card>
+        ))}
+      </main>
+    </>
   );
 }
 
