@@ -30,9 +30,9 @@ function App() {
         <Card>
           <AddUser showError={showModal} AddUserHandler={addUser} />
         </Card>
-        {usersList.map((user, index) => (
-          <Card>
-            <UsersItem key={index} user={user} />
+        {usersList.map(user => (
+          <Card key={Math.random()}>
+            <UsersItem user={user} />
           </Card>
         ))}
       </main>
