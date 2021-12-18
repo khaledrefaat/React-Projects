@@ -4,7 +4,7 @@ import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
-const emailReducer = (state, action) => {
+const formReducer = (state, action) => {
   switch (action.type) {
     case 'EMAIL_CHANGE':
       return {
@@ -30,7 +30,7 @@ const emailReducer = (state, action) => {
 };
 
 const Login = props => {
-  const [formState, dispatch] = useReducer(emailReducer, {
+  const [formState, dispatch] = useReducer(formReducer, {
     email: {
       value: '',
       isValid: true,
