@@ -9,20 +9,18 @@ import Filter from './components/Filter';
 function App() {
   const [popularMovies, setPopularMovies] = useState();
   const [filtered, setFiltered] = useState();
+  const [genre, setGenre] = useState(0);
 
   useEffect(() => {
     fetchPopular();
   }, []);
 
   const fetchPopular = async () => {
-    let data;
-
-    // `https://api.themoviedb.org/3/trending/all/day?api_key=${key}`
     try {
       const res = await fetch(
         ` https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`
       );
-      data = await res.json();
+      const data = await res.json();
       setPopularMovies(data);
       setFiltered(data.results);
     } catch (err) {
@@ -31,18 +29,22 @@ function App() {
   };
 
   const setFilter = genre => {
-    if (!genre) return setFiltered(popularMovies.results);
+    if (!genre) {
+      setGenre(0);
+      return setFiltered(popularMovies.results);
+    }
 
+    setGenre(genre);
     setFiltered(
-      popularMovies.results.filter(movie => {
-        return movie.genre_ids.find(genreNum => genreNum === genre);
-      })
+      popularMovies.results.filter(movie => movie.genre_ids.includes(genre))
     );
   };
 
+  console.log(genre);
+
   return (
     <div className="App">
-      <Filter setFilter={genre => setFilter(genre)} />
+      <Filter genre={genre} setFilter={genre => setFilter(genre)} />
       {popularMovies && <MovieList movies={filtered} />}
     </div>
   );
