@@ -3,9 +3,12 @@ import { useState, useEffect } from 'react';
 import key from './config/key';
 
 import './App.css';
+import MovieList from './components/MovieList';
+import Filter from './components/Filter';
 
 function App() {
-  const [trendingMovies, setTrendingMovies] = useState();
+  const [popularMovies, setPopularMovies] = useState();
+  const [filtered, setFiltered] = useState();
 
   useEffect(() => {
     fetchPopular();
@@ -14,30 +17,33 @@ function App() {
   const fetchPopular = async () => {
     let data;
 
+    // `https://api.themoviedb.org/3/trending/all/day?api_key=${key}`
     try {
       const res = await fetch(
-        `https://api.themoviedb.org/3/trending/all/day?api_key=${key}`
+        ` https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`
       );
       data = await res.json();
-      setTrendingMovies(data);
+      setPopularMovies(data);
+      setFiltered(data.results);
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(trendingMovies);
+  const setFilter = genre => {
+    if (!genre) return setFiltered(popularMovies.results);
+
+    setFiltered(
+      popularMovies.results.filter(movie => {
+        return movie.genre_ids.find(genreNum => genreNum === genre);
+      })
+    );
+  };
+
   return (
     <div className="App">
-      {trendingMovies &&
-        trendingMovies.results.map(movie => (
-          <div className="movie" key={Math.random()}>
-            <h2>{movie.title}</h2>
-            <img
-              src={`https://image.tmdb.org/t/p/w400${movie.backdrop_path}`}
-              alt={movie.title}
-            />
-          </div>
-        ))}
+      <Filter setFilter={genre => setFilter(genre)} />
+      {popularMovies && <MovieList movies={filtered} />}
     </div>
   );
 }

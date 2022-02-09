@@ -1,0 +1,29 @@
+.btn {
+  padding: 0.4rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 200px;
+  background-color: transparent;
+  border: 1px solid #341f97;
+  color: #341f97;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  text-transform: capitalize;
+}
+
+.btn:hover {
+  background-color: #341f97;
+  color: #fff;
+}
+
+.btn:not(:last-of-type) {
+  margin-right: 1rem;
+}
+
+.btn.active {
+  background-color: #341f97;
+  color: #fff;
+}
+
+.btn.active:hover {
+  opacity: 0.9;
+}
