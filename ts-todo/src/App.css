@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+}
+
+/* form Style */
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+input {
+  margin: 0 0.5rem;
+  padding: 0.2rem;
+}
+
+form button {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background-color: #341f97;
+  color: #fff;
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  transform: translateY(0);
+}
+
+form button:hover {
+  filter: brightness(110%);
+}
+
+form button:active {
+  transform: translateY(2px);
+}
+
+/* Todos Styles */
+
+.todo-list {
+  list-style: none;
+}
+
+.todo {
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.todo-done {
+  text-decoration: line-through;
+}
+
+.delete-btn,
+.done-btn {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+}
+
+.done-btn {
+  background-color: #2ecc71;
+}
+
+svg {
+  fill: #fff;
+}
