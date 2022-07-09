@@ -6,7 +6,8 @@ function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className="relative min-h-screen bg-zinc-800 pb-10">
+        <div className="bg" />
         <div className="container">
           <WelcomeBox />
           <OrderList />
