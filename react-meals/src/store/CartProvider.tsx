@@ -49,12 +49,18 @@ const CartProvider: React.FC<CartProviderInterface> = ({ children }) => {
     setCount(count);
   }, [items]);
 
+  const order = () => {
+    setItems([]);
+    console.log('Ordering...');
+  };
+
   const cartContext = {
     items,
     totalAmount: Math.round(totalAmount),
     addItem,
     removeItem,
     count: count,
+    order,
   };
 
   return (

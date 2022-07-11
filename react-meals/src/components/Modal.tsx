@@ -8,12 +8,12 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ hideModal }) => {
+  const CartContext = useContext(cartContext);
+
   const makeOrder = () => {
-    console.log('Making Order...');
+    CartContext.order();
     hideModal();
   };
-
-  const CartContext = useContext(cartContext);
 
   return ReactDom.createPortal(
     <div

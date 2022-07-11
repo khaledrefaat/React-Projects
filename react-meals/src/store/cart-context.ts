@@ -7,6 +7,7 @@ interface CartContextInterface {
   addItem: (item: CartItem, count?: number) => void;
   removeItem: (id: string) => void;
   count: number;
+  order: () => void;
 }
 
 const cartContext = createContext<CartContextInterface>({
@@ -15,6 +16,7 @@ const cartContext = createContext<CartContextInterface>({
   addItem: item => {},
   removeItem: id => {},
   count: 0,
+  order: () => {},
 });
 
 export default cartContext;
