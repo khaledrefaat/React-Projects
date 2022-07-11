@@ -1,4 +1,8 @@
+import { useState } from 'react';
+
 const OrderItem = () => {
+  const [orderAmount, setOrderAmount] = useState(1);
+
   return (
     <div className="flex justify-between order-item pb-3">
       <div>
@@ -11,9 +15,12 @@ const OrderItem = () => {
       <div className="flex flex-col">
         <div className="font-bold flex items-center">
           Amount
-          <span className="font-medium border py-.5 px-4 ml-2 text-left rounded-md">
-            1
-          </span>
+          <input
+            type="number"
+            className="font-medium border w-10 ml-2 text-left rounded-md outline-none "
+            value={orderAmount}
+            onChange={e => setOrderAmount(+e.target.value)}
+          />
         </div>
         <button className="py-1 rounded-3xl bg-primary text-white mt-2">
           + Add
