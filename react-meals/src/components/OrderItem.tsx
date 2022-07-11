@@ -1,16 +1,34 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import CartContext from '../store/cart-context';
 
-const OrderItem = () => {
+interface OrderItemProps {
+  title: string;
+  description: string;
+  price: number;
+  id: string;
+}
+
+const OrderItem: React.FC<OrderItemProps> = ({
+  title,
+  description,
+  price,
+  id,
+}) => {
   const [orderAmount, setOrderAmount] = useState(1);
+
+  const cartContext = useContext(CartContext);
+
+  const addOrder = () =>
+    cartContext.addItem({ title, price, id, count: 1 }, orderAmount);
 
   return (
     <div className="flex justify-between order-item pb-3">
       <div>
-        <h3 className="font-bold text-lg capitalize">sushi</h3>
+        <h3 className="font-bold text-lg capitalize">{title}</h3>
         <p className="text-gray-700 font-medium text-sm capitalize">
-          finest fish and veggies
+          {description}
         </p>
-        <p className="text-lg text-primary font-bold">$22.99</p>
+        <p className="text-lg text-primary font-bold">${price}</p>
       </div>
       <div className="flex flex-col">
         <div className="font-bold flex items-center">
@@ -22,7 +40,10 @@ const OrderItem = () => {
             onChange={e => setOrderAmount(+e.target.value)}
           />
         </div>
-        <button className="py-1 rounded-3xl bg-primary text-white mt-2">
+        <button
+          className="py-1 rounded-3xl bg-primary text-white mt-2"
+          onClick={addOrder}
+        >
           + Add
         </button>
       </div>

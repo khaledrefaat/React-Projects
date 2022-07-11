@@ -1,10 +1,14 @@
 import { ShoppingCartIcon } from '@heroicons/react/solid';
+import { useContext } from 'react';
+import cartContext from '../store/cart-context';
 
 interface HeaderProps {
   showModal: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ showModal }) => {
+  const CartContext = useContext(cartContext);
+
   return (
     <header className="py-5 bg-primary">
       <div className="container">
@@ -21,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ showModal }) => {
               your cart
             </p>
             <p className="px-4 bg-primary rounded-full text-white text-xl font-semibold font-mono ml-3">
-              0
+              {CartContext.count}
             </p>
           </div>
         </div>
